@@ -34,7 +34,7 @@ namespace Tisinalite.Pages
         {
             InitializeComponent();
             tbEditor.Text = @"Добро пожаловать в Tisinalite!
-Это open-souse приложение для ведения заметок
+Это open-source приложение для ведения заметок
 Вы можете создать свою, или открыть существующую
 А можете открыть любой текствый файл
 ";
