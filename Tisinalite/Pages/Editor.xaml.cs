@@ -25,8 +25,7 @@ namespace Tisinalite.Pages
     public partial class Editor : Page
     {
         private Note note = new Note { 
-            Title = "Welcome.txt",
-            Content = ""
+            Title = "Welcome.txt"
         };
         private Microsoft.Win32.OpenFileDialog _openDialog = new Microsoft.Win32.OpenFileDialog();
         private Microsoft.Win32.SaveFileDialog _saveDialog = new Microsoft.Win32.SaveFileDialog();
@@ -34,12 +33,19 @@ namespace Tisinalite.Pages
         public Editor()
         {
             InitializeComponent();
-            //this.DataContext = note;
+            tbEditor.Text = @"Добро пожаловать в Tisinalite!
+Это open-souse приложение для ведения заметок
+Вы можете создать свою, или открыть существующую
+А можете открыть любой текствый файл
+";
         }
 
         private void Info_Click(object sender, RoutedEventArgs e)
         {
-            
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
+                Debug.WriteLine("Directory Info:   " + Directory.GetDirectories(Environment.GetEnvironmentVariable("USERPROFILE") + @"\Documents"));
+            }
         }
 
         private void NewExecute(object sender, ExecutedRoutedEventArgs e)
