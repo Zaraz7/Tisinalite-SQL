@@ -1,6 +1,8 @@
 # Tisinalite
 Tisinalite - приложение для введения заметок на C# (note-taking application on .NET)
 
+## Компиляция
+Для сборки необходим **.NET Framework 4.7.2**.
 
 ## ToDo
 ### Обязательные требования
