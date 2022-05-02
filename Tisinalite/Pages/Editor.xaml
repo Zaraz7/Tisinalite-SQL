@@ -7,8 +7,30 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Editor">
+    <Page.CommandBindings>
+        <CommandBinding Command="New" Executed="NewExecute"/>
+        <CommandBinding Command="Open" Executed="OpenExecute"/>
+        <CommandBinding Command="Save" Executed="SaveExecute"/>
+        <CommandBinding Command="SaveAs" Executed="SaveAsExecute"/>
+        <CommandBinding Command="Close" Executed="CloseExecute"/>
+    </Page.CommandBindings>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Height="30" Padding="2">
+            <MenuItem Header="Файл">
+                <MenuItem Command="New"/>
+                <MenuItem Command="Open"/>
+                <MenuItem Command="Save"/>
+                <MenuItem Command="SaveAs"/>
+                <Separator/>
+                <MenuItem Command="Close"/>
+            </MenuItem>
+            <MenuItem Header="Вставка">
 
-    <Grid>
-        
-    </Grid>
+            </MenuItem>
+            <MenuItem Header="Справка">
+                <MenuItem Header="О программе" Click="Info_Click"/>
+            </MenuItem>
+        </Menu>
+        <TextBox x:Name="tbEditor" AcceptsReturn="True" TextWrapping="Wrap" TextChanged="ContentChanged"/>
+    </DockPanel>
 </Page>

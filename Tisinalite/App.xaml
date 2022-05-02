@@ -4,6 +4,8 @@
              xmlns:local="clr-namespace:Tisinalite"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style TargetType="MenuItem">
+            <Setter Property="Padding" Value="3"/>
+        </Style>
     </Application.Resources>
 </Application>
