@@ -24,12 +24,13 @@
                 <Separator/>
                 <MenuItem Command="Close"/>
             </MenuItem>
-            <MenuItem Header="Вставка">
+            <!--На данном этапе эти кнопки пока не нужны-->
+            <!--<MenuItem Header="Вставка">
 
             </MenuItem>
             <MenuItem Header="Справка">
                 <MenuItem Header="О программе" Click="Info_Click"/>
-            </MenuItem>
+            </MenuItem>-->
         </Menu>
         <TextBox x:Name="tbEditor" AcceptsReturn="True" TextWrapping="Wrap" TextChanged="ContentChanged"/>
     </DockPanel>

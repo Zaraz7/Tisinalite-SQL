@@ -39,14 +39,14 @@ namespace Tisinalite.Pages
 А можете открыть любой текствый файл
 ";
         }
-
-        private void Info_Click(object sender, RoutedEventArgs e)
-        {
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-            {
-                Debug.WriteLine("Directory Info:   " + Directory.GetDirectories(Environment.GetEnvironmentVariable("USERPROFILE") + @"\Documents"));
-            }
-        }
+        // В будущем планируется сохранять заметки в пользовательских документах
+        //private void Info_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+        //    {
+        //        Debug.WriteLine("Directory Info:   " + Directory.GetDirectories(Environment.GetEnvironmentVariable("USERPROFILE") + @"\Documents"));
+        //    }
+        //}
 
         private void NewExecute(object sender, ExecutedRoutedEventArgs e)
         {
@@ -54,15 +54,12 @@ namespace Tisinalite.Pages
             {
                 SaveExecute(sender, e);
             }
-            //note.Content = "";
-            //SaveAsExecute(sender, e);
             tbEditor.Text = "";
         }
         private void OpenExecute(object sender, ExecutedRoutedEventArgs e)
         {
             if (isDirty)
             {
-                // messege
                 SaveExecute(sender, e);
             }
             if (_openDialog.ShowDialog() == true)
@@ -93,11 +90,7 @@ namespace Tisinalite.Pages
             }
             System.Windows.Application.Current.Shutdown();
         }
-        private bool UnplannedClosing()
-        {
-            
-            return true;
-        }
+
         private void SaveFile()
         {
             StreamWriter writer = new StreamWriter(_saveDialog.FileName);
@@ -121,6 +114,7 @@ namespace Tisinalite.Pages
             isDirty = true;
         }
     }
+    // Предпологается, что этот класс должен выполнять роль контекста данных
     public class Note
     {
         private string _title;
@@ -128,10 +122,10 @@ namespace Tisinalite.Pages
         {
             get { return _title; } set { _title = value; }
         }
-        private string _content;
-        public string Content
-        {
-            get { return _content; } set { _content = value; }
-        }
+        //private string _content;
+        //public string Content
+        //{
+        //    get { return _content; } set { _content = value; }
+        //}
     }
 }
