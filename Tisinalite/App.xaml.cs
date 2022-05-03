@@ -28,6 +28,7 @@ namespace Tisinalite
 
                     settings.OpenNote = f;
                     settings.Save();
+                    
                 }
             }
         }

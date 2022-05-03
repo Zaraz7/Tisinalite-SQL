@@ -11,10 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.IO;
-using Microsoft.Win32;
-using System.Windows.Forms;
 using System.Diagnostics;
 
 namespace Tisinalite.Pages
@@ -24,55 +21,31 @@ namespace Tisinalite.Pages
     /// </summary>
     public partial class Editor : Page
     {
-        private Microsoft.Win32.OpenFileDialog _openDialog = new Microsoft.Win32.OpenFileDialog();
-        private Microsoft.Win32.SaveFileDialog _saveDialog = new Microsoft.Win32.SaveFileDialog();
         private Settings _settings = Settings.GetSettings();
+        private string notePath;
         public Editor()
         {
-
             InitializeComponent();
             if (_settings.OpenNote != null)
             {
-                OpenFile(Global.GetNoteFile(_settings.OpenNote));
+                notePath = Global.GetNoteFile(_settings.OpenNote);
+                OpenFile(notePath);
             }
-            
             UpdateTreeView();
             
         }
 
         private void NewExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            //if (isDirty)
-            //{
-            //    SaveExecute(sender, e);
-            //}
-            //tbEditor.Text = "";
-        }
-        private void OpenExecute(object sender, ExecutedRoutedEventArgs e)
-        {
-            //if (isDirty)
-            //{
-            //    SaveExecute(sender, e);
-            //}
-            //if (_openDialog.ShowDialog() == true)
-            //    OpenFile();
+            SaveFile();
+            notePath = null;
+            tbEditor.Text = "";
+            SaveFile();
+            UpdateTreeView();
         }
         private void SaveExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            //if (_saveDialog.FileName == "")
-            //{
-            //    SaveAsExecute(sender, e);
-            //    return;
-            //}
-            //SaveFile();
-        }
-        private void SaveAsExecute(object sender, ExecutedRoutedEventArgs e)
-        {
-            //_saveDialog.FileName = note.Title;
-            //if (_saveDialog.ShowDialog() == true)
-            //{
-            //    SaveFile();
-            //}
+            SaveFile();
         }
         private void CloseExecute(object sender, ExecutedRoutedEventArgs e)
         {
@@ -91,8 +64,8 @@ namespace Tisinalite.Pages
         private static TreeViewItem CreateDirNode(DirectoryInfo directoryInfo)
         {
             var directoryNode = new TreeViewItem { Header = directoryInfo.Name };
-            foreach (var directory in directoryInfo.GetDirectories())
-                directoryNode.Items.Add(CreateDirNode(directory));
+            //foreach (var directory in directoryInfo.GetDirectories())
+            //    directoryNode.Items.Add(CreateDirNode(directory));
 
             foreach (var file in directoryInfo.GetFiles())
                 directoryNode.Items.Add(new TreeViewItem { Header = file.Name });
@@ -101,37 +74,65 @@ namespace Tisinalite.Pages
         }
 
 
-        private void SaveFile(string filePath = null)
+        private void SaveFile()
         {
-            
-            //StreamWriter writer = new StreamWriter(_saveDialog.FileName);
-            //Debug.WriteLine($"file name: {_saveDialog.FileName}");
-            //writer.WriteLine(tbEditor.Text);
-            //Debug.WriteLine($"Content: {tbEditor.Text}");
-            //writer.Close();
-            //isDirty = false;
+            if (notePath == null)
+            {
+                Input input = new Input();
+                input.Title = "Введите имя фала";
+                input.ShowDialog();
+                try
+                {
+                    string path = Path.Combine(Global.NotesDir, input.Entry);
+                    
+                    //if (path == "Tisinalite") return;
+                    notePath = path;
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString());
+                }
+            }
+            if (notePath != null) { 
+                using (StreamWriter writer = new StreamWriter(notePath))
+                {
+                    writer.WriteLine(tbEditor.Text);
+                    writer.Close();
+                }
+            }
         }
-        private void OpenFile(string filePath)
+        private void OpenFile(string _notePath)
         {
-            StreamReader reader = new StreamReader(filePath);
-            tbEditor.Text = reader.ReadToEnd();
-            reader.Close();
-            //StreamReader reader = new StreamReader(_openDialog.FileName);
-            //tbEditor.Text = reader.ReadToEnd();
-            //reader.Close();
-            //_saveDialog.FileName = _openDialog.FileName;
-            //isDirty = false;
+            if (_notePath != notePath)
+                SaveFile();
+            try { 
+                using (StreamReader reader = new StreamReader(_notePath))
+                {
+                    tbEditor.Text = reader.ReadToEnd();
+                    reader.Close();
+                    notePath = _notePath;
+                }
+            }
+            catch
+            {
+            }
         }
 
         private void ContentChanged(object sender, TextChangedEventArgs e)
         {
-            //isDirty = true;
         }
 
         private void tvNote_Changed(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            Debug.WriteLine(tvNotes.SelectedItem);
-            Debug.WriteLine(tvNotes.SelectedValue);
+            //if (tbEditor.Text != "")    SaveFile();
+            TreeViewItem item = (TreeViewItem)tvNotes.SelectedItem;
+            Debug.WriteLine(item);
+            if (item != null)
+            {
+                Debug.WriteLine(item.Header);
+                string tempPath = Global.GetNoteFile(item.Header as string);
+                OpenFile(tempPath);
+            }
         }
     }
 }

@@ -9,18 +9,14 @@
       Title="Editor">
     <Page.CommandBindings>
         <CommandBinding Command="New" Executed="NewExecute"/>
-        <CommandBinding Command="Open" Executed="OpenExecute"/>
         <CommandBinding Command="Save" Executed="SaveExecute"/>
-        <CommandBinding Command="SaveAs" Executed="SaveAsExecute"/>
         <CommandBinding Command="Close" Executed="CloseExecute"/>
     </Page.CommandBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top" Height="30"  Padding="2">
             <MenuItem Header="Файл">
                 <MenuItem Command="New"/>
-                <MenuItem Command="Open"/>
                 <MenuItem Command="Save"/>
-                <MenuItem Command="SaveAs"/>
                 <Separator/>
                 <MenuItem Command="Close"/>
             </MenuItem>
