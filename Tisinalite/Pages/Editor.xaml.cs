@@ -134,5 +134,10 @@ namespace Tisinalite.Pages
                 OpenFile(tempPath);
             }
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

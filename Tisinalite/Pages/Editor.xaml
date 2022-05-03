@@ -13,8 +13,8 @@
         <CommandBinding Command="Close" Executed="CloseExecute"/>
     </Page.CommandBindings>
     <DockPanel>
-        <Menu DockPanel.Dock="Top" Height="30"  Padding="2">
-            <MenuItem Header="Файл">
+        <Menu DockPanel.Dock="Top" Height="30">
+            <MenuItem Header=" Ξ" FontSize="18" Foreground="#555" FontWeight="Bold" VerticalContentAlignment="Center" Width="30" BorderBrush="#555">
                 <MenuItem Command="New"/>
                 <MenuItem Command="Save"/>
                 <Separator/>
