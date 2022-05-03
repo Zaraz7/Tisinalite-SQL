@@ -39,14 +39,6 @@ namespace Tisinalite.Pages
 А можете открыть любой текствый файл
 ";
         }
-        // В будущем планируется сохранять заметки в пользовательских документах
-        //private void Info_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-        //    {
-        //        Debug.WriteLine("Directory Info:   " + Directory.GetDirectories(Environment.GetEnvironmentVariable("USERPROFILE") + @"\Documents"));
-        //    }
-        //}
 
         private void NewExecute(object sender, ExecutedRoutedEventArgs e)
         {
@@ -122,10 +114,5 @@ namespace Tisinalite.Pages
         {
             get { return _title; } set { _title = value; }
         }
-        //private string _content;
-        //public string Content
-        //{
-        //    get { return _content; } set { _content = value; }
-        //}
     }
 }

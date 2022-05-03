@@ -15,10 +15,5 @@ namespace Tisinalite
             get { return _dir; }
             set { _dir = value; }
         }
-        //private string _content;
-        //public string Content
-        //{
-        //    get { return _content; } set { _content = value; }
-        //}
     }
 }
