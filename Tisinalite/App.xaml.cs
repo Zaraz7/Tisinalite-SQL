@@ -10,9 +10,6 @@ using System.Diagnostics;
 
 namespace Tisinalite
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
     public partial class App : Application
     {
         public string NotesDir;
@@ -20,7 +17,7 @@ namespace Tisinalite
         {
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
-                //Debug.WriteLine( "\n\n" + Directory.Exists(Environment.GetEnvironmentVariable("USERPROFILE") + @"\Documents"));
+       
                 NotesDir = Environment.GetEnvironmentVariable("USERPROFILE") + @"\Documents\Tisinalite";
                 if (!Directory.Exists(NotesDir))
                 {
@@ -28,6 +25,7 @@ namespace Tisinalite
                     Directory.CreateDirectory(NotesDir);
                     string f = "Welcome.txt";
                     File.Copy(Path.Combine("Resources", f), Path.Combine(NotesDir, f));
+                    
                 }
             }
         }
