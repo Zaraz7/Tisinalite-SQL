@@ -39,6 +39,7 @@ namespace Tisinalite
                 fs.Close();
             }
         }
-        public List<Note> Notes { get; set; }
+        
+        public string OpenNote { get; set; }
     }
 }

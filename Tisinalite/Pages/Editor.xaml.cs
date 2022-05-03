@@ -24,63 +24,63 @@ namespace Tisinalite.Pages
     /// </summary>
     public partial class Editor : Page
     {
-        private Note note = new Note { 
-            Title = "Welcome.txt"
-        };
         private Microsoft.Win32.OpenFileDialog _openDialog = new Microsoft.Win32.OpenFileDialog();
         private Microsoft.Win32.SaveFileDialog _saveDialog = new Microsoft.Win32.SaveFileDialog();
-        bool isDirty = false;
+        private Settings _settings = Settings.GetSettings();
         public Editor()
         {
+
             InitializeComponent();
-            tbEditor.Text = @"Добро пожаловать в Tisinalite!
-Это open-source приложение для ведения заметок
-Вы можете создать свою, или открыть существующую
-А можете открыть любой текствый файл
-";          UpdateTreeView();
+            if (_settings.OpenNote != null)
+            {
+                OpenFile(Global.GetNoteFile(_settings.OpenNote));
+            }
+            
+            UpdateTreeView();
+            
         }
 
         private void NewExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            if (isDirty)
-            {
-                SaveExecute(sender, e);
-            }
-            tbEditor.Text = "";
+            //if (isDirty)
+            //{
+            //    SaveExecute(sender, e);
+            //}
+            //tbEditor.Text = "";
         }
         private void OpenExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            if (isDirty)
-            {
-                SaveExecute(sender, e);
-            }
-            if (_openDialog.ShowDialog() == true)
-                OpenFile();
+            //if (isDirty)
+            //{
+            //    SaveExecute(sender, e);
+            //}
+            //if (_openDialog.ShowDialog() == true)
+            //    OpenFile();
         }
         private void SaveExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            if (_saveDialog.FileName == "")
-            {
-                SaveAsExecute(sender, e);
-                return;
-            }
-            SaveFile();
+            //if (_saveDialog.FileName == "")
+            //{
+            //    SaveAsExecute(sender, e);
+            //    return;
+            //}
+            //SaveFile();
         }
         private void SaveAsExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            _saveDialog.FileName = note.Title;
-            if (_saveDialog.ShowDialog() == true)
-            {
-                SaveFile();
-            }
+            //_saveDialog.FileName = note.Title;
+            //if (_saveDialog.ShowDialog() == true)
+            //{
+            //    SaveFile();
+            //}
         }
         private void CloseExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            if (isDirty)
-            {
-                SaveExecute(sender, e);
-            }
-            System.Windows.Application.Current.Shutdown();
+            //if (isDirty)
+            //{
+            //    SaveExecute(sender, e);
+            //}
+            //System.Windows.Application.Current.Shutdown();
         }
         private void UpdateTreeView()
         {
@@ -101,36 +101,37 @@ namespace Tisinalite.Pages
         }
 
 
-        private void SaveFile()
+        private void SaveFile(string filePath = null)
         {
-            StreamWriter writer = new StreamWriter(_saveDialog.FileName);
-            Debug.WriteLine($"file name: {_saveDialog.FileName}");
-            writer.WriteLine(tbEditor.Text);
-            Debug.WriteLine($"Content: {tbEditor.Text}");
-            writer.Close();
-            isDirty = false;
+            
+            //StreamWriter writer = new StreamWriter(_saveDialog.FileName);
+            //Debug.WriteLine($"file name: {_saveDialog.FileName}");
+            //writer.WriteLine(tbEditor.Text);
+            //Debug.WriteLine($"Content: {tbEditor.Text}");
+            //writer.Close();
+            //isDirty = false;
         }
-        private void OpenFile()
+        private void OpenFile(string filePath)
         {
-            StreamReader reader = new StreamReader(_openDialog.FileName);
+            StreamReader reader = new StreamReader(filePath);
             tbEditor.Text = reader.ReadToEnd();
             reader.Close();
-            _saveDialog.FileName = _openDialog.FileName;
-            isDirty = false;
+            //StreamReader reader = new StreamReader(_openDialog.FileName);
+            //tbEditor.Text = reader.ReadToEnd();
+            //reader.Close();
+            //_saveDialog.FileName = _openDialog.FileName;
+            //isDirty = false;
         }
 
         private void ContentChanged(object sender, TextChangedEventArgs e)
         {
-            isDirty = true;
+            //isDirty = true;
         }
-    }
-    // Предпологается, что этот класс должен выполнять роль контекста данных
-    public class Note
-    {
-        private string _title;
-        public string Title
+
+        private void tvNote_Changed(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            get { return _title; } set { _title = value; }
+            Debug.WriteLine(tvNotes.SelectedItem);
+            Debug.WriteLine(tvNotes.SelectedValue);
         }
     }
 }
