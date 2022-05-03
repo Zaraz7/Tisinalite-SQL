@@ -37,7 +37,7 @@ namespace Tisinalite.Pages
 Это open-source приложение для ведения заметок
 Вы можете создать свою, или открыть существующую
 А можете открыть любой текствый файл
-";
+";          UpdateTreeView();
         }
 
         private void NewExecute(object sender, ExecutedRoutedEventArgs e)
@@ -82,6 +82,24 @@ namespace Tisinalite.Pages
             }
             System.Windows.Application.Current.Shutdown();
         }
+        private void UpdateTreeView()
+        {
+            tvNotes.Items.Clear();
+            var rootDirectoryInfo = new DirectoryInfo(Global.NotesDir);
+            tvNotes.Items.Add(CreateDirNode(rootDirectoryInfo));
+        }
+        private static TreeViewItem CreateDirNode(DirectoryInfo directoryInfo)
+        {
+            var directoryNode = new TreeViewItem { Header = directoryInfo.Name };
+            foreach (var directory in directoryInfo.GetDirectories())
+                directoryNode.Items.Add(CreateDirNode(directory));
+
+            foreach (var file in directoryInfo.GetFiles())
+                directoryNode.Items.Add(new TreeViewItem { Header = file.Name });
+
+            return directoryNode;
+        }
+
 
         private void SaveFile()
         {

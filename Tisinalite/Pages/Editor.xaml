@@ -15,7 +15,7 @@
         <CommandBinding Command="Close" Executed="CloseExecute"/>
     </Page.CommandBindings>
     <DockPanel>
-        <Menu DockPanel.Dock="Top" Height="30" Padding="2">
+        <Menu DockPanel.Dock="Top" Height="30"  Padding="2">
             <MenuItem Header="Файл">
                 <MenuItem Command="New"/>
                 <MenuItem Command="Open"/>
@@ -25,6 +25,15 @@
                 <MenuItem Command="Close"/>
             </MenuItem>
         </Menu>
-        <TextBox x:Name="tbEditor" AcceptsReturn="True" TextWrapping="Wrap" TextChanged="ContentChanged"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TreeView Name="tvNotes" Grid.Column="0"/>
+            <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+            <TextBox x:Name="tbEditor" AcceptsReturn="True" TextWrapping="Wrap" TextChanged="ContentChanged" Grid.Column="2"/>
+        </Grid>
     </DockPanel>
 </Page>
