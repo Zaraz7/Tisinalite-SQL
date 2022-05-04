@@ -27,7 +27,15 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TreeView Name="tvNotes" Grid.Column="0" SelectedItemChanged="tvNote_Changed">
+            <TreeView Name="tvNotes" Grid.Column="0" SelectedItemChanged="tvNote_Changed" Background="#323130">
+                <TreeView.Resources>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontWeight" Value="Medium"/>
+                        <Setter Property="IsExpanded" Value="True"/>
+                        <Setter Property="FontSize" Value="14"/>
+                    </Style>
+                </TreeView.Resources>
             </TreeView>
             <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
             <TextBox x:Name="tbEditor" AcceptsReturn="True" TextWrapping="Wrap" TextChanged="ContentChanged" Grid.Column="2"/>
