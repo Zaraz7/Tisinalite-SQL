@@ -29,7 +29,7 @@ namespace Tisinalite.Pages
             if (_settings.OpenNote != null)
             {
                 notePath = Global.GetNoteFile(_settings.OpenNote);
-                OpenFile(notePath, _settings.OpenNote);
+                OpenFile(_settings.OpenNote);
             }
             UpdateTreeView();
             
@@ -41,7 +41,8 @@ namespace Tisinalite.Pages
 
         private void NewExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            SaveFile();
+            if (notePath != null)
+                SaveFile();
             notePath = null;
             tbEditor.Text = "";
             SaveFile();
@@ -65,11 +66,8 @@ namespace Tisinalite.Pages
         }
         private void CloseExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            //if (isDirty)
-            //{
-            //    SaveExecute(sender, e);
-            //}
-            //System.Windows.Application.Current.Shutdown();
+            SaveExecute(sender, e);
+            Application.Current.Shutdown();
         }
         private void UpdateTreeView()
         {
@@ -80,9 +78,6 @@ namespace Tisinalite.Pages
         private static TreeViewItem CreateDirNode(DirectoryInfo directoryInfo)
         {
             var directoryNode = new TreeViewItem { Header = directoryInfo.Name };
-            //foreach (var directory in directoryInfo.GetDirectories())
-            //    directoryNode.Items.Add(CreateDirNode(directory));
-
             foreach (var file in directoryInfo.GetFiles())
                 directoryNode.Items.Add(new TreeViewItem { Header = file.Name });
 
@@ -101,7 +96,7 @@ namespace Tisinalite.Pages
                 {
                     string path = Path.Combine(Global.NotesDir, input.Entry);
                     
-                    //if (path == "Tisinalite") return;
+                    if (path == "Tisinalite") return;
                     notePath = path;
                 }
                 catch (Exception e)
@@ -117,14 +112,14 @@ namespace Tisinalite.Pages
                 }
             }
         }
-        private void OpenFile(string _notePath, string note)
+        private void OpenFile(string note)
         {
-            if (_notePath != notePath)
+            string _notePath = Global.GetNoteFile(note);
+            if (notePath != null && _notePath != notePath)
                 SaveFile();
             try { 
                 using (StreamReader reader = new StreamReader(_notePath))
                 {
-                    //_settings.OpenNote
                     tbEditor.Text = reader.ReadToEnd();
                     reader.Close();
                     notePath = _notePath;
@@ -148,8 +143,8 @@ namespace Tisinalite.Pages
             if (item != null)
             {
                 string note = item.Header.ToString();
-                string tempPath = Global.GetNoteFile(note);
-                OpenFile(tempPath, note);
+                //string tempPath = Global.GetNoteFile(note);
+                OpenFile(note);
             }
         }
 

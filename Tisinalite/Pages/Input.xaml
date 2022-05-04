@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Tisinalite.Pages"
         mc:Ignorable="d"
-        Title="Input" Height="100" Width="200" MaxHeight="100" MinHeight="100">
-    <StackPanel VerticalAlignment="Center">
+        Title="Input" Height="140" Width="200" MinHeight="120" SizeToContent="Height">
+    <StackPanel VerticalAlignment="Center" Margin="2">
+        <TextBlock x:Name="messege" Text="Введите имя файла" TextAlignment="Center" TextWrapping="Wrap"/>
+        <TextBlock x:Name="warning" Visibility="Collapsed" Foreground="Red" TextAlignment="Center" TextWrapping="Wrap"/>
         <TextBox x:Name="inputEntry" Margin="10"/>
         <Button Content="Ок" Width="50" Click="Ok_Click"/>
     </StackPanel>
