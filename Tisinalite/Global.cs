@@ -9,12 +9,12 @@ namespace Tisinalite
 {
     public class Global
     {
-        public static string NotesDir = Environment.GetEnvironmentVariable("USERPROFILE") + @"\Documents\Tisinalite";
+        public static string TisinaliteDir = Environment.GetEnvironmentVariable("USERPROFILE") + @"\Documents\Tisinalite";
         public static string SettingsFile = "settings.xml";
+        public string NotesDir = TisinaliteDir + @"\Notes";
         public static string GetSettingsFile()
         {
-            Debug.WriteLine(NotesDir + "\\" + SettingsFile);
-            return NotesDir + "\\" + SettingsFile;
+            return TisinaliteDir + "\\" + SettingsFile;
         }
         public static string GetNoteFile(string note)
         {
