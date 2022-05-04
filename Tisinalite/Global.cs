@@ -11,7 +11,7 @@ namespace Tisinalite
     {
         public static string TisinaliteDir = Environment.GetEnvironmentVariable("USERPROFILE") + @"\Documents\Tisinalite";
         public static string SettingsFile = "settings.xml";
-        public string NotesDir = TisinaliteDir + @"\Notes";
+        public static string NotesDir = TisinaliteDir + @"\Notes";
         public static string GetSettingsFile()
         {
             return TisinaliteDir + "\\" + SettingsFile;
