@@ -50,7 +50,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
+  <!--  <PropertyGroup>
     <ManifestCertificateThumbprint>9C748C081C799AD40EE800CB17F8F33FF1A88B64</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
@@ -61,7 +61,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
-  </PropertyGroup>
+  </PropertyGroup> -->
   <PropertyGroup>
     <ApplicationIcon>tisinalite-log.ico</ApplicationIcon>
   </PropertyGroup>
