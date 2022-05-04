@@ -29,10 +29,14 @@ namespace Tisinalite.Pages
             if (_settings.OpenNote != null)
             {
                 notePath = Global.GetNoteFile(_settings.OpenNote);
-                OpenFile(notePath);
+                OpenFile(notePath, _settings.OpenNote);
             }
             UpdateTreeView();
             
+        }
+        public void SaveSettings()
+        {
+            _settings.Save();
         }
 
         private void NewExecute(object sender, ExecutedRoutedEventArgs e)
@@ -46,6 +50,18 @@ namespace Tisinalite.Pages
         private void SaveExecute(object sender, ExecutedRoutedEventArgs e)
         {
             SaveFile();
+            UpdateTreeView();
+        }
+        private void DeleteExecute(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (MessageBox.Show("Уверены, что хоте удалить заметку?", "Подтверждение действия", 
+                MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                File.Delete(notePath);
+                notePath = null;
+                UpdateTreeView();
+                tbEditor.Clear();
+            }
         }
         private void CloseExecute(object sender, ExecutedRoutedEventArgs e)
         {
@@ -74,7 +90,7 @@ namespace Tisinalite.Pages
         }
 
 
-        private void SaveFile()
+        public void SaveFile()
         {
             if (notePath == null)
             {
@@ -101,16 +117,18 @@ namespace Tisinalite.Pages
                 }
             }
         }
-        private void OpenFile(string _notePath)
+        private void OpenFile(string _notePath, string note)
         {
             if (_notePath != notePath)
                 SaveFile();
             try { 
                 using (StreamReader reader = new StreamReader(_notePath))
                 {
+                    //_settings.OpenNote
                     tbEditor.Text = reader.ReadToEnd();
                     reader.Close();
                     notePath = _notePath;
+                    _settings.OpenNote = note;
                 }
             }
             catch
@@ -122,22 +140,22 @@ namespace Tisinalite.Pages
         {
         }
 
+
         private void tvNote_Changed(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            //if (tbEditor.Text != "")    SaveFile();
             TreeViewItem item = (TreeViewItem)tvNotes.SelectedItem;
             Debug.WriteLine(item);
             if (item != null)
             {
-                Debug.WriteLine(item.Header);
-                string tempPath = Global.GetNoteFile(item.Header as string);
-                OpenFile(tempPath);
+                string note = item.Header.ToString();
+                string tempPath = Global.GetNoteFile(note);
+                OpenFile(tempPath, note);
             }
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void CanDeleteExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-
+            e.CanExecute = File.Exists(notePath);
         }
     }
 }

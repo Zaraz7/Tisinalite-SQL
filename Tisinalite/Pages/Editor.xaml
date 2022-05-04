@@ -11,12 +11,14 @@
         <CommandBinding Command="New" Executed="NewExecute"/>
         <CommandBinding Command="Save" Executed="SaveExecute"/>
         <CommandBinding Command="Close" Executed="CloseExecute"/>
+        <CommandBinding Command="Delete" Executed="DeleteExecute" CanExecute="CanDeleteExecute"/>
     </Page.CommandBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top" Height="30">
             <MenuItem Header=" Ξ" FontSize="18" Foreground="#555" FontWeight="Bold" VerticalContentAlignment="Center" Width="30" BorderBrush="#555">
                 <MenuItem Command="New"/>
                 <MenuItem Command="Save"/>
+                <MenuItem Command="Delete"/>
                 <Separator/>
                 <MenuItem Command="Close"/>
             </MenuItem>

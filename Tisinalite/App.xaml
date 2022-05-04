@@ -8,5 +8,11 @@
         <Style TargetType="MenuItem">
             <Setter Property="Padding" Value="3"/>
         </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
     </Application.Resources>
 </Application>

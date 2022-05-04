@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace Tisinalite
 {
@@ -24,6 +25,13 @@ namespace Tisinalite
         {
             InitializeComponent();
             MainFrame.Navigate(new Pages.Editor());
+        }
+
+        private void ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Pages.Editor editor = MainFrame.Content as Pages.Editor;
+            editor.SaveFile();
+            editor.SaveSettings();
         }
     }
 }
