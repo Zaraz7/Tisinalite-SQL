@@ -40,7 +40,7 @@
                 </TreeView.Resources>
             </TreeView>
             <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
-            <TextBox x:Name="tbEditor" AcceptsReturn="True" TextWrapping="Wrap" TextChanged="ContentChanged" Grid.Column="2"/>
+            <TextBox x:Name="tbEditor" AcceptsReturn="True" TextWrapping="Wrap" Grid.Column="2"/>
         </Grid>
     </DockPanel>
 </Page>

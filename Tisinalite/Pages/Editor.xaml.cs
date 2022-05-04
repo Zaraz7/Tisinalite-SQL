@@ -16,9 +16,6 @@ using System.Diagnostics;
 
 namespace Tisinalite.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для Editor.xaml
-    /// </summary>
     public partial class Editor : Page
     {
         private Settings _settings = Settings.GetSettings();
@@ -131,11 +128,6 @@ namespace Tisinalite.Pages
             }
         }
 
-        private void ContentChanged(object sender, TextChangedEventArgs e)
-        {
-        }
-
-
         private void tvNote_Changed(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             TreeViewItem item = (TreeViewItem)tvNotes.SelectedItem;
@@ -143,7 +135,6 @@ namespace Tisinalite.Pages
             if (item != null)
             {
                 string note = item.Header.ToString();
-                //string tempPath = Global.GetNoteFile(note);
                 OpenFile(note);
             }
         }
