@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.IO;
+using MdXaml;
 using System.Diagnostics;
 
 namespace Tisinalite.Pages
@@ -29,7 +30,7 @@ namespace Tisinalite.Pages
                 OpenFile(_settings.OpenNote);
             }
             UpdateTreeView();
-            
+
         }
         public void SaveSettings()
         {
@@ -108,6 +109,7 @@ namespace Tisinalite.Pages
                 {
                     writer.WriteLine(tbEditor.Text);
                     writer.Close();
+                    Markdownview.Markdown = tbEditor.Text;
                 }
             }
         }
@@ -119,10 +121,12 @@ namespace Tisinalite.Pages
             try { 
                 using (StreamReader reader = new StreamReader(_notePath))
                 {
-                    tbEditor.Text = reader.ReadToEnd();
+                    string noteText = reader.ReadToEnd();
+                    tbEditor.Text = noteText; 
                     reader.Close();
                     notePath = _notePath;
                     _settings.OpenNote = note;
+                    Markdownview.Markdown = noteText;
                 }
             }
             catch

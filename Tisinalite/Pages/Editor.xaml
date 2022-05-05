@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Tisinalite.Pages"
+      xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Editor">
@@ -23,11 +24,13 @@
                 <MenuItem Command="Close"/>
             </MenuItem>
         </Menu>
-        <Grid>
+        <Grid x:Name="MainGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="150" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <TreeView Name="tvNotes" Grid.Column="0" SelectedItemChanged="tvNote_Changed" Background="#323130">
                 <TreeView.Resources>
@@ -39,8 +42,13 @@
                     </Style>
                 </TreeView.Resources>
             </TreeView>
+            <!-- - Убрать повоторение -->
             <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
             <TextBox x:Name="tbEditor" AcceptsReturn="True" TextWrapping="Wrap" Grid.Column="2"/>
+            <GridSplitter Grid.Column="3" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+            <mdxam:MarkdownScrollViewer x:Name="Markdownview" Grid.Column="4">
+                
+            </mdxam:MarkdownScrollViewer>
         </Grid>
     </DockPanel>
 </Page>
