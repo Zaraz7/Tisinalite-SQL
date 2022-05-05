@@ -88,7 +88,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Global.cs" />
-    <Compile Include="Note.cs" />
     <Compile Include="Pages\Input.xaml.cs">
       <DependentUpon>Input.xaml</DependentUpon>
     </Compile>

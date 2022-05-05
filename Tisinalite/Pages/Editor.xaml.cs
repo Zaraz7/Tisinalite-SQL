@@ -48,6 +48,7 @@ namespace Tisinalite.Pages
         private void SaveExecute(object sender, ExecutedRoutedEventArgs e)
         {
             SaveFile();
+            SaveSettings();
             UpdateTreeView();
         }
         private void DeleteExecute(object sender, ExecutedRoutedEventArgs e)
@@ -59,6 +60,7 @@ namespace Tisinalite.Pages
                 notePath = null;
                 UpdateTreeView();
                 tbEditor.Clear();
+                _settings.OpenNote = null;
             }
         }
         private void CloseExecute(object sender, ExecutedRoutedEventArgs e)
@@ -84,7 +86,7 @@ namespace Tisinalite.Pages
 
         public void SaveFile()
         {
-            if (notePath == null)
+            if (notePath == null && !String.IsNullOrEmpty(tbEditor.Text))
             {
                 Input input = new Input();
                 input.Title = "Введите имя фала";
@@ -93,7 +95,7 @@ namespace Tisinalite.Pages
                 {
                     string path = Path.Combine(Global.NotesDir, input.Entry);
                     
-                    if (path == "Tisinalite") return;
+                    if (!input.Result) return;
                     notePath = path;
                 }
                 catch (Exception e)
