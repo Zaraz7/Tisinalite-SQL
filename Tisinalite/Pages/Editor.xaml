@@ -44,7 +44,7 @@
             </TreeView>
             <!-- - Убрать повоторение -->
             <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
-            <TextBox x:Name="tbEditor" AcceptsReturn="True" TextWrapping="Wrap" Grid.Column="2"/>
+            <TextBox x:Name="tbEditor" AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap" Grid.Column="2" Background="#336666" Foreground="White"/>
             <GridSplitter Grid.Column="3" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
             <mdxam:MarkdownScrollViewer x:Name="Markdownview" Grid.Column="4">
                 
