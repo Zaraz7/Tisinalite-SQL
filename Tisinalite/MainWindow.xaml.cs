@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Diagnostics;
+using MdXaml;
 using System.IO;
 
 
@@ -33,6 +34,10 @@ namespace Tisinalite
                 OpenFile(_settings.OpenNote);
             }
             UpdateTreeView();
+            Binding binding = new Binding();
+            binding.ElementName = "tbEditor";
+            binding.Path = new PropertyPath("Text");
+            Markdownview.SetBinding(MarkdownScrollViewer.MarkdownProperty, binding);
 
         }
         public void SaveSettings()
@@ -113,7 +118,6 @@ namespace Tisinalite
                 {
                     writer.WriteLine(tbEditor.Text);
                     writer.Close();
-                    Markdownview.Markdown = tbEditor.Text;
                 }
             }
         }
@@ -131,7 +135,6 @@ namespace Tisinalite
                     reader.Close();
                     notePath = _notePath;
                     _settings.OpenNote = note;
-                    Markdownview.Markdown = noteText;
                 }
             }
             catch
