@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Diagnostics;
 using MdXaml;
 using System.IO;
+using Microsoft.Win32;
 
 
 namespace Tisinalite
@@ -49,9 +50,8 @@ namespace Tisinalite
         {
             if (notePath != null)
                 SaveFile();
-            notePath = null;
+            NewFile();
             tbEditor.Text = "";
-            SaveFile();
             UpdateTreeView();
         }
         private void SaveExecute(object sender, ExecutedRoutedEventArgs e)
@@ -92,25 +92,30 @@ namespace Tisinalite
             return directoryNode;
         }
 
+        public void NewFile()
+        {
+            Pages.Input input = new Pages.Input
+            {
+                Title = "Введите имя фала"
+            };
+            input.ShowDialog();
+            try
+            {
+                string path = Path.Combine(Global.NotesDir, input.Entry);
 
+                if (!input.Result) return;
+                File.Create(path);
+                notePath = path;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+            }
+        }
         public void SaveFile()
         {
-            if (notePath == null && !String.IsNullOrEmpty(tbEditor.Text))
-            {
-                Pages.Input input = new Pages.Input();
-                input.Title = "Введите имя фала";
-                input.ShowDialog();
-                try
-                {
-                    string path = Path.Combine(Global.NotesDir, input.Entry);
-
-                    if (!input.Result) return;
-                    notePath = path;
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.ToString());
-                }
+            if (notePath == null){ 
+                NewFile(); 
             }
             if (notePath != null)
             {
@@ -162,6 +167,29 @@ namespace Tisinalite
         {
             SaveFile();
             SaveSettings();
+        }
+
+        private void PasteExecute(object sender, ExecutedRoutedEventArgs e)
+        {
+            tbEditor.Paste();
+        }
+
+        private void Image_Click(object sender, RoutedEventArgs e)
+        {
+            var fileContent = string.Empty;
+            var filePath = string.Empty;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.Filter = "Файлы изображений(*.PNG;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF;*.PNG|Все файлы (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                filePath = openFileDialog.FileName;
+                tbEditor.SelectedText = $" ![Название картинки]({filePath}) ";
+            }
         }
     }
 }

@@ -12,42 +12,69 @@
         <CommandBinding Command="Save" Executed="SaveExecute"/>
         <CommandBinding Command="Close" Executed="CloseExecute"/>
         <CommandBinding Command="Delete" Executed="DeleteExecute" CanExecute="CanDeleteExecute"/>
+        <CommandBinding Command="Paste" Executed="PasteExecute"/>
     </Window.CommandBindings>
-    <DockPanel>
-        <Menu DockPanel.Dock="Top" Height="30">
-            <MenuItem Header=" Ξ" FontSize="18" Foreground="#555" FontWeight="Bold" VerticalContentAlignment="Center" Width="30" BorderBrush="#555">
+    <!--<DockPanel>-->
+    <!--<Menu DockPanel.Dock="Top" Height="33">
+            <MenuItem FontSize="18" Foreground="#555" FontWeight="Bold" VerticalContentAlignment="Center" Width="33" BorderBrush="#555" Height="33">
+                <MenuItem.Icon>
+                    <Image Source="Resources/file.ico" Height="18" Width="18" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                </MenuItem.Icon>
                 <MenuItem Command="New"/>
                 <MenuItem Command="Save"/>
                 <MenuItem Command="Delete"/>
                 <Separator/>
                 <MenuItem Command="Close"/>
             </MenuItem>
+        </Menu>-->
+    <Grid x:Name="MainGrid" Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Height="50" Width="50">
+                <MenuItem.Header>
+                    <Image Source="Resources/file.ico"/>
+                </MenuItem.Header>
+                <MenuItem Command="New"/>
+                <MenuItem Command="Save"/>
+                <MenuItem Command="Delete"/>
+                <Separator/>
+                <MenuItem Command="Close"/>
+            </MenuItem>
+            <MenuItem Height="50" Width="50">
+                <MenuItem.Header>
+                    <Image Source="Resources/paste.ico"/>
+                </MenuItem.Header>
+                <MenuItem Command="Paste"/>
+                <MenuItem Header="Вставить изображение" Click="Image_Click"/>
+            </MenuItem>
         </Menu>
-        <Grid x:Name="MainGrid">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TreeView Name="tvNotes" Grid.Column="0" SelectedItemChanged="tvNote_Changed" Background="#323130">
-                <TreeView.Resources>
-                    <Style TargetType="TreeViewItem">
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="FontWeight" Value="Medium"/>
-                        <Setter Property="IsExpanded" Value="True"/>
-                        <Setter Property="FontSize" Value="14"/>
-                    </Style>
-                </TreeView.Resources>
-            </TreeView>
-            <!-- - Убрать повоторение -->
-            <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
-            <TextBox x:Name="tbEditor" AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap" Grid.Column="2" Background="#336666" Foreground="White"/>
-            <GridSplitter Grid.Column="3" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
-            <mdxam:MarkdownScrollViewer x:Name="Markdownview" Grid.Column="4">
+        <TreeView Name="tvNotes" Grid.Column="0" Grid.Row="1" SelectedItemChanged="tvNote_Changed" Background="#323130">
+            <TreeView.Resources>
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Medium"/>
+                    <Setter Property="IsExpanded" Value="True"/>
+                    <Setter Property="FontSize" Value="14"/>
+                </Style>
+            </TreeView.Resources>
+        </TreeView>
 
-            </mdxam:MarkdownScrollViewer>
-        </Grid>
-    </DockPanel>
+        <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
+        <TextBox x:Name="tbEditor" AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap" Grid.Column="2" Grid.RowSpan="2" Background="#336666" Foreground="White"/>
+        <GridSplitter Grid.Column="3" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
+        <mdxam:MarkdownScrollViewer x:Name="Markdownview" Grid.Column="4" Grid.RowSpan="2">
+
+        </mdxam:MarkdownScrollViewer>
+    </Grid>
+    <!--</DockPanel>-->
 </Window>
