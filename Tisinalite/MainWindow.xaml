@@ -14,19 +14,6 @@
         <CommandBinding Command="Delete" Executed="DeleteExecute" CanExecute="CanDeleteExecute"/>
         <CommandBinding Command="Paste" Executed="PasteExecute"/>
     </Window.CommandBindings>
-    <!--<DockPanel>-->
-    <!--<Menu DockPanel.Dock="Top" Height="33">
-            <MenuItem FontSize="18" Foreground="#555" FontWeight="Bold" VerticalContentAlignment="Center" Width="33" BorderBrush="#555" Height="33">
-                <MenuItem.Icon>
-                    <Image Source="Resources/file.ico" Height="18" Width="18" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                </MenuItem.Icon>
-                <MenuItem Command="New"/>
-                <MenuItem Command="Save"/>
-                <MenuItem Command="Delete"/>
-                <Separator/>
-                <MenuItem Command="Close"/>
-            </MenuItem>
-        </Menu>-->
     <Grid x:Name="MainGrid" Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150" />
@@ -76,5 +63,4 @@
 
         </mdxam:MarkdownScrollViewer>
     </Grid>
-    <!--</DockPanel>-->
 </Window>
