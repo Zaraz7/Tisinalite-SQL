@@ -29,11 +29,20 @@ namespace Tisinalite.Pages
         {
             if (string.IsNullOrEmpty(tbLogin.Text) || string.IsNullOrEmpty(pbPassword.Password))
             {
-                MessageBox.Show("Сначало введите все поля.");
+                MessageBox.Show("Сначало заполните все поля.");
                 return;
             }
+            using (var db = new TisinaliteDBEntities())
+            {
+                var user = db.Users.AsNoTracking().FirstOrDefault(u => u.Login == tbLogin.Text && u.Password == pbPassword.Password);
+                if (user == null)
+                {
+                    MessageBox.Show("Неверный логин или пароль.");
+                    return;
+                }
+                Global.MainFrame.Navigate(new Pages.General());
+            }
             
-            Global.MainFrame.Navigate(new Global());
         }
     }
 }
