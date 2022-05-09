@@ -40,7 +40,7 @@ namespace Tisinalite.Pages
                     MessageBox.Show("Неверный логин или пароль.");
                     return;
                 }
-                Global.MainFrame.Navigate(new Pages.General());
+                Global.MainFrame.Navigate(new Pages.General(user));
             }
             
         }
