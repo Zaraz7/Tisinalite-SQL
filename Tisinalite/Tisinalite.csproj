@@ -105,8 +105,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Global.cs" />
+    <Compile Include="Pages\General.xaml.cs">
+      <DependentUpon>General.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Input.xaml.cs">
       <DependentUpon>Input.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
     <Page Include="MainWindow.xaml">
@@ -121,7 +127,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\General.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Input.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

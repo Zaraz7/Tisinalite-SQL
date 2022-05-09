@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Tisinalite"
              Startup="App_Startup"
              StartupUri="MainWindow.xaml">
+    <!-- #F2F2F2 #333 #27AE60-->
     <Application.Resources>
         <Style TargetType="MenuItem">
             <Setter Property="Padding" Value="3"/>
@@ -11,8 +12,19 @@
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="15"/>
         </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#27AE60"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="Frame">
+            <Setter Property="NavigationUIVisibility" Value="Hidden"/>
         </Style>
     </Application.Resources>
 </Application>

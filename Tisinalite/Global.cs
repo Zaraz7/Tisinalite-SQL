@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Windows.Controls;
 
 namespace Tisinalite
 {
@@ -12,6 +10,7 @@ namespace Tisinalite
         public static string TisinaliteDir = Environment.GetEnvironmentVariable("USERPROFILE") + @"\Documents\Tisinalite";
         public static string SettingsFile = "settings.xml";
         public static string NotesDir = TisinaliteDir + @"\Notes";
+        public static Frame MainFrame;
         public static string GetSettingsFile()
         {
             return TisinaliteDir + "\\" + SettingsFile;
