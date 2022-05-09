@@ -13,7 +13,7 @@
             <TextBlock Text="Логин"/>
             <TextBox x:Name="tbLogin"/>
             <TextBlock Text="Пароль"/>
-            <PasswordBox x:Name="pbLogin" Margin="0,0,0,15"/>
+            <PasswordBox x:Name="pbPassword" Margin="0,0,0,15"/>
             <Button Click="Login_Click">
                 <Button.Effect>
                     <DropShadowEffect></DropShadowEffect>

@@ -24,7 +24,6 @@ namespace Tisinalite
     /// </summary>
     public partial class MainWindow : Window
     {
-        Pages.General general;
         Pages.Login login;
         public MainWindow()
         {
@@ -38,12 +37,7 @@ namespace Tisinalite
 
         private void ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (general != null) {
-                general.SaveFile();
-                general.SaveSettings();
-            }
-
+            // При закрытии приложения
         }
-
     }
 }
