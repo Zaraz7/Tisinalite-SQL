@@ -17,7 +17,7 @@ namespace Tisinalite
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Groups()
         {
-            this.NotesOfGroups = new HashSet<NotesOfGroups>();
+            this.Notes = new HashSet<Notes>();
             this.UsersOfGroups = new HashSet<UsersOfGroups>();
         }
     
@@ -27,7 +27,7 @@ namespace Tisinalite
     
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NotesOfGroups> NotesOfGroups { get; set; }
+        public virtual ICollection<Notes> Notes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsersOfGroups> UsersOfGroups { get; set; }
     }

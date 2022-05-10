@@ -15,11 +15,17 @@ namespace Tisinalite
     
     public partial class TisinaliteDBEntities : DbContext
     {
+        private static TisinaliteDBEntities _context;
         public TisinaliteDBEntities()
             : base("name=TisinaliteDBEntities")
         {
         }
-    
+        public static TisinaliteDBEntities GetContext()
+        {
+            if (_context == null)
+                _context = new TisinaliteDBEntities();
+            return _context;
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -28,7 +34,6 @@ namespace Tisinalite
         public virtual DbSet<Groups> Groups { get; set; }
         public virtual DbSet<Images> Images { get; set; }
         public virtual DbSet<Notes> Notes { get; set; }
-        public virtual DbSet<NotesOfGroups> NotesOfGroups { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<UsersOfGroups> UsersOfGroups { get; set; }

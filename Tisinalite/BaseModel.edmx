@@ -27,14 +27,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Contents" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="NotesOfGroups">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="NoteID" Type="int" />
           <Property Name="GroupID" Type="int" />
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -74,27 +67,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_NotesOfGroups_Groups">
+        <Association Name="FK_Notes_Groups">
           <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
-          <End Role="NotesOfGroups" Type="Self.NotesOfGroups" Multiplicity="*" />
+          <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Groups">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="NotesOfGroups">
+            <Dependent Role="Notes">
               <PropertyRef Name="GroupID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NotesOfGroups_Notes">
-          <End Role="Notes" Type="Self.Notes" Multiplicity="0..1" />
-          <End Role="NotesOfGroups" Type="Self.NotesOfGroups" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Notes">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="NotesOfGroups">
-              <PropertyRef Name="NoteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -126,7 +107,6 @@
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notes" EntityType="Self.Notes" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="NotesOfGroups" EntityType="Self.NotesOfGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsersOfGroups" EntityType="Self.UsersOfGroups" Schema="dbo" store:Type="Tables" />
@@ -134,13 +114,9 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Groups" EntitySet="Groups" />
           </AssociationSet>
-          <AssociationSet Name="FK_NotesOfGroups_Groups" Association="Self.FK_NotesOfGroups_Groups">
+          <AssociationSet Name="FK_Notes_Groups" Association="Self.FK_Notes_Groups">
             <End Role="Groups" EntitySet="Groups" />
-            <End Role="NotesOfGroups" EntitySet="NotesOfGroups" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NotesOfGroups_Notes" Association="Self.FK_NotesOfGroups_Notes">
             <End Role="Notes" EntitySet="Notes" />
-            <End Role="NotesOfGroups" EntitySet="NotesOfGroups" />
           </AssociationSet>
           <AssociationSet Name="FK_UsersOfGroups_Groups" Association="Self.FK_UsersOfGroups_Groups">
             <End Role="Groups" EntitySet="Groups" />
@@ -164,7 +140,7 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MasterID" Type="Int32" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Groups_Users" FromRole="Groups" ToRole="Users" />
-          <NavigationProperty Name="NotesOfGroups" Relationship="Self.FK_NotesOfGroups_Groups" FromRole="Groups" ToRole="NotesOfGroups" />
+          <NavigationProperty Name="Notes" Relationship="Self.FK_Notes_Groups" FromRole="Groups" ToRole="Notes" />
           <NavigationProperty Name="UsersOfGroups" Relationship="Self.FK_UsersOfGroups_Groups" FromRole="Groups" ToRole="UsersOfGroups" />
         </EntityType>
         <EntityType Name="Images">
@@ -181,17 +157,8 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Contents" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="NotesOfGroups" Relationship="Self.FK_NotesOfGroups_Notes" FromRole="Notes" ToRole="NotesOfGroups" />
-        </EntityType>
-        <EntityType Name="NotesOfGroups">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="NoteID" Type="Int32" />
           <Property Name="GroupID" Type="Int32" />
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Groups" Relationship="Self.FK_NotesOfGroups_Groups" FromRole="NotesOfGroups" ToRole="Groups" />
-          <NavigationProperty Name="Notes" Relationship="Self.FK_NotesOfGroups_Notes" FromRole="NotesOfGroups" ToRole="Notes" />
+          <NavigationProperty Name="Groups" Relationship="Self.FK_Notes_Groups" FromRole="Notes" ToRole="Groups" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -235,14 +202,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_NotesOfGroups_Groups">
+        <Association Name="FK_Notes_Groups">
           <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
-          <End Role="NotesOfGroups" Type="Self.NotesOfGroups" Multiplicity="*" />
+          <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Groups">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="NotesOfGroups">
+            <Dependent Role="Notes">
               <PropertyRef Name="GroupID" />
             </Dependent>
           </ReferentialConstraint>
@@ -256,18 +223,6 @@
             </Principal>
             <Dependent Role="UsersOfGroups">
               <PropertyRef Name="GroupID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_NotesOfGroups_Notes">
-          <End Role="Notes" Type="Self.Notes" Multiplicity="0..1" />
-          <End Role="NotesOfGroups" Type="Self.NotesOfGroups" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Notes">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="NotesOfGroups">
-              <PropertyRef Name="NoteID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -287,7 +242,6 @@
           <EntitySet Name="Groups" EntityType="Self.Groups" />
           <EntitySet Name="Images" EntityType="Self.Images" />
           <EntitySet Name="Notes" EntityType="Self.Notes" />
-          <EntitySet Name="NotesOfGroups" EntityType="Self.NotesOfGroups" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Users" EntityType="Self.Users" />
           <EntitySet Name="UsersOfGroups" EntityType="Self.UsersOfGroups" />
@@ -295,17 +249,13 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Groups" EntitySet="Groups" />
           </AssociationSet>
-          <AssociationSet Name="FK_NotesOfGroups_Groups" Association="Self.FK_NotesOfGroups_Groups">
+          <AssociationSet Name="FK_Notes_Groups" Association="Self.FK_Notes_Groups">
             <End Role="Groups" EntitySet="Groups" />
-            <End Role="NotesOfGroups" EntitySet="NotesOfGroups" />
+            <End Role="Notes" EntitySet="Notes" />
           </AssociationSet>
           <AssociationSet Name="FK_UsersOfGroups_Groups" Association="Self.FK_UsersOfGroups_Groups">
             <End Role="Groups" EntitySet="Groups" />
             <End Role="UsersOfGroups" EntitySet="UsersOfGroups" />
-          </AssociationSet>
-          <AssociationSet Name="FK_NotesOfGroups_Notes" Association="Self.FK_NotesOfGroups_Notes">
-            <End Role="Notes" EntitySet="Notes" />
-            <End Role="NotesOfGroups" EntitySet="NotesOfGroups" />
           </AssociationSet>
           <AssociationSet Name="FK_UsersOfGroups_Users" Association="Self.FK_UsersOfGroups_Users">
             <End Role="Users" EntitySet="Users" />
@@ -341,15 +291,7 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Contents" ColumnName="Contents" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NotesOfGroups">
-            <EntityTypeMapping TypeName="TisinaliteDBModel.NotesOfGroups">
-              <MappingFragment StoreEntitySet="NotesOfGroups">
-                <ScalarProperty Name="NoteID" ColumnName="NoteID" />
                 <ScalarProperty Name="GroupID" ColumnName="GroupID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,17 +14,11 @@ namespace Tisinalite
     
     public partial class Notes
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Notes()
-        {
-            this.NotesOfGroups = new HashSet<NotesOfGroups>();
-        }
-    
         public int ID { get; set; }
         public string Title { get; set; }
         public string Contents { get; set; }
+        public Nullable<int> GroupID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NotesOfGroups> NotesOfGroups { get; set; }
+        public virtual Groups Groups { get; set; }
     }
 }

@@ -138,9 +138,6 @@
     <Compile Include="Notes.cs">
       <DependentUpon>BaseModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="NotesOfGroups.cs">
-      <DependentUpon>BaseModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Pages\General.xaml.cs">
       <DependentUpon>General.xaml</DependentUpon>
     </Compile>

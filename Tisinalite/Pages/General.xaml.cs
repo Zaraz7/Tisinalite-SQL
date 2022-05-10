@@ -26,8 +26,10 @@ namespace Tisinalite.Pages
     {
         private Settings _settings = Settings.GetSettings();
         //private string notePath;
-        public General(Users user)
+        Users user;
+        public General(Users _user)
         {
+            user = _user;
             InitializeComponent();
 
             UpdateTreeView();
@@ -75,7 +77,43 @@ namespace Tisinalite.Pages
         }
         private void UpdateTreeView()
         {
+            tvNotes.Items.Clear();
+            var userOfGroups = TisinaliteDBEntities.GetContext().UsersOfGroups.ToList();
+            var groups = TisinaliteDBEntities.GetContext().UsersOfGroups.ToList();
+            
+            userOfGroups = userOfGroups.Where(g => g.UserID == user.ID).ToList();
 
+
+            foreach (var link in userOfGroups)
+            {
+                using (var db = new TisinaliteDBEntities())
+                {
+                    var group = db.Groups.AsNoTracking().FirstOrDefault(g=> g.ID == link.GroupID);
+                    var groupNode = new TreeViewItem { Header = group.Title };
+                    foreach (var note in TisinaliteDBEntities.GetContext().Notes.Where(n => n.GroupID == group.ID).ToList())
+                    {
+                        var noteNode = new TreeViewItem { Header = note.Title, Foreground = Brushes.White};
+                        groupNode.Items.Add(noteNode);
+                    }
+                    tvNotes.Items.Add(groupNode);
+                }
+
+            }
+            /*
+            Debug.WriteLine("Searching groups");
+            var groups = TisinaliteDBEntities.GetContext().Groups.ToList();
+            groups = groups.Where(g => g.UsersOfGroups == user.UsersOfGroups).ToList();
+            Debug.WriteLine(groups.Count());
+            
+            var mainNode = new TreeViewItem();
+            foreach (var group in groups)
+            {
+                Debug.WriteLine(group.Title);
+                var groupNode = new TreeViewItem { Header = group.Title };
+                mainNode.Items.Add(groupNode);
+            }
+            tvNotes.Items.Add(mainNode);*/
+            /* ------------------ */
             //tvNotes.Items.Clear();
             //var rootDirectoryInfo = new DirectoryInfo(Global.NotesDir);
             //tvNotes.Items.Add(CreateDirNode(rootDirectoryInfo));
