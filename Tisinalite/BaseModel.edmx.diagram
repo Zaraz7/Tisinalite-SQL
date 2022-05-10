@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="369e6579515b429aade51da7716e6725" Name="Diagram1">
-        <EntityTypeShape EntityType="TisinaliteDBModel.Groups" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+      <Diagram DiagramId="7d276cc8cc3f47238a010380a71c6792" Name="Diagram1">
+        <EntityTypeShape EntityType="TisinaliteDBModel.Groups" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TisinaliteDBModel.Images" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TisinaliteDBModel.Notes" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TisinaliteDBModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="7.125" IsExpanded="true" />

@@ -23,7 +23,8 @@ namespace Tisinalite
     
         public int ID { get; set; }
         public string Title { get; set; }
-        public Nullable<int> MasterID { get; set; }
+        public int MasterID { get; set; }
+        public string Access { get; set; }
     
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
