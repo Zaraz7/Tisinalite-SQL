@@ -27,7 +27,8 @@ namespace Tisinalite.Pages
         private Settings _settings = Settings.GetSettings();
         //private string notePath;
         Users user;
-        Notes openNote;
+        Notes openNote= new Notes();
+        Groups selectedGroup = new Groups();
         public General(Users _user)
         {
             user = _user;
@@ -47,29 +48,32 @@ namespace Tisinalite.Pages
 
         private void NewExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            //if (notePath != null)
-            //    SaveFile();
-            //NewFile();
-            //tbEditor.Text = "";
-            //UpdateTreeView();
+
+            if (openNote.ID != 0)
+                SaveNote();
+            NewNote();
+            UpdateTreeView();
         }
         private void SaveExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            //SaveFile();
-            //SaveSettings();
-            //UpdateTreeView();
+            SaveNote();
+            UpdateTreeView();
         }
         private void DeleteExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            //if (MessageBox.Show("Уверены, что хоте удалить заметку?", "Подтверждение действия",
-            //    MessageBoxButton.OKCancel) == MessageBoxResult.OK)
-            //{
-            //    File.Delete(notePath);
-            //    notePath = null;
-            //    UpdateTreeView();
-            //    tbEditor.Clear();
-            //    _settings.OpenNote = null;
-            //}
+            if (MessageBox.Show($"Вы точно хотите удалить \"{openNote.Title}\"?", "Подтверждение действия", MessageBoxButton.YesNo) != MessageBoxResult.Yes)
+                return;
+            try
+            {
+                TisinaliteDBEntities.GetContext().Notes.Remove(openNote);
+                TisinaliteDBEntities.GetContext().SaveChanges();
+
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.ToString());
+            }
+            UpdateTreeView();
         }
         private void CloseExecute(object sender, ExecutedRoutedEventArgs e)
         {
@@ -104,40 +108,74 @@ namespace Tisinalite.Pages
         }
 
 
-        public void NewFile()
+        public void NewNote()
         {
+            if (selectedGroup.ID == 0)
+            {
+                MessageBox.Show("Сначало выбирете группу, в кторой будете вести заметку");
+                return;
+            }
+            Input input = new Input();
+            input.ShowDialog();
+            Debug.WriteLine(input.Result);
+            if (input.Result)
+            {
+                openNote = new Notes { Title = input.Entry, GroupID = selectedGroup.ID };
+                TisinaliteDBEntities.GetContext().Notes.Add(openNote);
+                TisinaliteDBEntities.GetContext().SaveChanges();
+                tbEditor.Clear();
+                Debug.WriteLine(openNote.Title);
+            }
 
         }
-        public void SaveFile()
+        public void SaveNote()
         {
+            if (openNote.ID == 0)
+                NewNote();
+            try
+            {
+                openNote.Contents = tbEditor.Text;
+                TisinaliteDBEntities.GetContext().SaveChanges();
 
+            }catch (Exception error)
+            {
+                MessageBox.Show(error.ToString());
+            }
         }
-        private void OpenNote()
+        private void OpenNote(Notes note)
         {
-
+            if (!string.IsNullOrEmpty(tbEditor.Text))
+                SaveNote();
+            openNote = note;
+            tbEditor.Text = note.Contents;
         }
 
         private void tvNote_Changed(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             TreeViewItem item = (TreeViewItem)tvNotes.SelectedItem;
+            if (item == null)
+            {
+                Debug.WriteLine("Не работает");
+                return;
+            }
             if (item.Foreground.Equals(Brushes.White))
             {
                 Debug.WriteLine("Note");
-                Notes note = item.Tag as Notes;
-                Debug.WriteLine(note.Title);
+                OpenNote((Notes)item.Tag);
             }
             else
             {
                 Debug.WriteLine("Group");
                 Groups group = item.Tag as Groups;
-                Debug.WriteLine(group.Title);
+                Debug.WriteLine(group.Title + tvNotes.SelectedValuePath);
+                selectedGroup = group;
             }
 
         }
 
         private void CanDeleteExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-            //e.CanExecute = File.Exists(notePath);
+            e.CanExecute = openNote.ID != 0;
         }
 
         private void ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
