@@ -58,7 +58,6 @@ namespace Tisinalite.Pages
             {
                 TisinaliteDBEntities.GetContext().Notes.Remove(openNote);
                 TisinaliteDBEntities.GetContext().SaveChanges();
-
             }
             catch (Exception error)
             {
@@ -85,6 +84,7 @@ namespace Tisinalite.Pages
                 using (var db = new TisinaliteDBEntities())
                 {
                     var group = db.Groups.AsNoTracking().FirstOrDefault(g => g.ID == link.GroupID);
+                    if (group.Access == "personal") selectedGroup = group;
                     var groupNode = new TreeViewItem { Header = group.Title, Tag = group };
 
                     foreach (var note in TisinaliteDBEntities.GetContext().Notes
@@ -182,6 +182,27 @@ namespace Tisinalite.Pages
         private void Image_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void NewGroup_Click(object sender, RoutedEventArgs e)
+        {
+            Input input = new Input();
+            input.ShowDialog();
+            Debug.WriteLine(input.Result);
+            if (input.Result)
+            {
+                selectedGroup = new Groups { Title = input.Entry, MasterID = user.ID, Access="private"};
+                TisinaliteDBEntities.GetContext().Groups.Add(selectedGroup);
+                TisinaliteDBEntities.GetContext().SaveChanges();
+                Debug.WriteLine(selectedGroup.ID);
+
+                var link = new UsersOfGroups { UserID = user.ID, GroupID = selectedGroup.ID };
+                TisinaliteDBEntities.GetContext().UsersOfGroups.Add(link);
+                TisinaliteDBEntities.GetContext().SaveChanges();
+
+                Debug.WriteLine(selectedGroup.Title);
+            }
+            UpdateTreeView();
         }
     }
 }

@@ -16,9 +16,10 @@
         <CommandBinding Command="Delete" Executed="DeleteExecute" CanExecute="CanDeleteExecute"/>
         <CommandBinding Command="Paste" Executed="PasteExecute"/>
     </Page.CommandBindings>
+    
     <Grid x:Name="MainGrid" Margin="5">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="220" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto" />
@@ -28,10 +29,21 @@
             <RowDefinition Height="55"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        
         <Menu Grid.Row="0">
             <MenuItem Height="50" Width="50">
                 <MenuItem.Header>
-                    <Image Source="/Tisinalite;component/Resources/file.ico"/>
+                    <Image Source="/Tisinalite;component/Resources/user.ico" >
+                        <Image.Effect>
+                            <DropShadowEffect ShadowDepth="1"></DropShadowEffect>
+                        </Image.Effect>
+                    </Image>
+                </MenuItem.Header>
+                <MenuItem Header="Выход"/>
+            </MenuItem>
+            <MenuItem Height="50" Width="50">
+                <MenuItem.Header>
+                    <Image Source="/Tisinalite;component/Resources/file.ico"></Image>
                 </MenuItem.Header>
                 <MenuItem Command="New"/>
                 <MenuItem Command="Save"/>
@@ -46,7 +58,19 @@
                 <MenuItem Command="Paste"/>
                 <MenuItem Header="Вставить изображение" Click="Image_Click"/>
             </MenuItem>
+            <MenuItem Height="50" Width="50">
+                <MenuItem.Header>
+                    <Image Source="/Tisinalite;component/Resources/folder.ico" >
+                        <Image.Effect>
+                            <DropShadowEffect ShadowDepth="1"></DropShadowEffect>
+                        </Image.Effect>
+                    </Image>
+                </MenuItem.Header>
+                <MenuItem Header="Новая папка" Click="NewGroup_Click"/>
+                <MenuItem Header="Удалить папку"/>
+            </MenuItem>
         </Menu>
+        
         <TreeView Name="tvNotes" Grid.Column="0" Grid.Row="1" SelectedItemChanged="tvNote_Changed" Background="#333">
             <TreeView.Resources>
                 <Style TargetType="TreeViewItem">
