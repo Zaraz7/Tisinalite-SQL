@@ -6,6 +6,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Diagnostics;
+using System.Data.Entity;
 using MdXaml;
 
 namespace Tisinalite.Pages
@@ -18,7 +19,7 @@ namespace Tisinalite.Pages
         private Settings _settings = Settings.GetSettings();
         //private string notePath;
         Users user;
-        Notes openNote= new Notes();
+        Notes openNote = new Notes();
         Groups selectedGroup = new Groups();
         public General(Users _user)
         {
@@ -84,7 +85,11 @@ namespace Tisinalite.Pages
                 using (var db = new TisinaliteDBEntities())
                 {
                     var group = db.Groups.AsNoTracking().FirstOrDefault(g => g.ID == link.GroupID);
-                    if (group.Access == "personal") selectedGroup = group;
+                    if (group == null)
+                        continue;
+
+                    if (group.Access == "personal") 
+                        selectedGroup = group;
                     var groupNode = new TreeViewItem { Header = group.Title, Tag = group };
 
                     foreach (var note in TisinaliteDBEntities.GetContext().Notes
@@ -128,7 +133,8 @@ namespace Tisinalite.Pages
                 openNote.Contents = tbEditor.Text;
                 TisinaliteDBEntities.GetContext().SaveChanges();
 
-            }catch (Exception error)
+            }
+            catch (Exception error)
             {
                 MessageBox.Show(error.ToString());
             }
@@ -191,7 +197,7 @@ namespace Tisinalite.Pages
             Debug.WriteLine(input.Result);
             if (input.Result)
             {
-                selectedGroup = new Groups { Title = input.Entry, MasterID = user.ID, Access="private"};
+                selectedGroup = new Groups { Title = input.Entry, MasterID = user.ID, Access = "private" };
                 TisinaliteDBEntities.GetContext().Groups.Add(selectedGroup);
                 TisinaliteDBEntities.GetContext().SaveChanges();
                 Debug.WriteLine(selectedGroup.ID);
@@ -201,6 +207,48 @@ namespace Tisinalite.Pages
                 TisinaliteDBEntities.GetContext().SaveChanges();
 
                 Debug.WriteLine(selectedGroup.Title);
+            }
+            UpdateTreeView();
+        }
+
+        private void DeleteGroup_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedGroup.ID == 0)
+            {
+                MessageBox.Show("Сначало выберети группу.");
+                return;
+            }
+            if (selectedGroup.Access == "personal")
+            {
+                MessageBox.Show("Вы не можете удалить свою личную группу, она у вас одна!");
+                return;
+            }
+            if (MessageBox.Show("Вы точно хотите удаить группу и её заметки? Это действие невозможно отменить!",
+                "Подтверждение действия", MessageBoxButton.YesNoCancel) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    var links = TisinaliteDBEntities.GetContext().UsersOfGroups.ToList();
+                    links = links.Where(l => l.GroupID == selectedGroup.ID).ToList();
+                    TisinaliteDBEntities.GetContext().UsersOfGroups.RemoveRange(links);
+
+                    if (selectedGroup.Access != "public")
+                    {
+                        var notes = TisinaliteDBEntities.GetContext().Notes.ToList();
+                        notes = notes.Where(n => n.GroupID == selectedGroup.ID).ToList();
+                        TisinaliteDBEntities.GetContext().Notes.RemoveRange(notes);
+
+                        TisinaliteDBEntities.GetContext().Groups.Attach(selectedGroup);
+                        TisinaliteDBEntities.GetContext().Entry(selectedGroup).State = EntityState.Deleted;
+                    }
+
+                    TisinaliteDBEntities.GetContext().SaveChanges();
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.ToString());
+                }
+                
             }
             UpdateTreeView();
         }

@@ -67,7 +67,7 @@
                     </Image>
                 </MenuItem.Header>
                 <MenuItem Header="Новая папка" Click="NewGroup_Click"/>
-                <MenuItem Header="Удалить папку"/>
+                <MenuItem Header="Удалить папку" Click="DeleteGroup_Click"/>
             </MenuItem>
         </Menu>
         
