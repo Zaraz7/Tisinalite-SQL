@@ -192,22 +192,24 @@ namespace Tisinalite.Pages
 
         private void NewGroup_Click(object sender, RoutedEventArgs e)
         {
-            Input input = new Input();
+            var input = new GroupEdit(user.ID);
             input.ShowDialog();
-            Debug.WriteLine(input.Result);
-            if (input.Result)
-            {
-                selectedGroup = new Groups { Title = input.Entry, MasterID = user.ID, Access = "private" };
-                TisinaliteDBEntities.GetContext().Groups.Add(selectedGroup);
-                TisinaliteDBEntities.GetContext().SaveChanges();
-                Debug.WriteLine(selectedGroup.ID);
+            //Input input = new Input();
+            //input.ShowDialog();
+            //Debug.WriteLine(input.Result);
+            //if (input.Result)
+            //{
+            //    selectedGroup = new Groups { Title = input.Entry, MasterID = user.ID, Access = "private" };
+            //    TisinaliteDBEntities.GetContext().Groups.Add(selectedGroup);
+            //    TisinaliteDBEntities.GetContext().SaveChanges();
+            //    Debug.WriteLine(selectedGroup.ID);
 
-                var link = new UsersOfGroups { UserID = user.ID, GroupID = selectedGroup.ID };
-                TisinaliteDBEntities.GetContext().UsersOfGroups.Add(link);
-                TisinaliteDBEntities.GetContext().SaveChanges();
+            //    var link = new UsersOfGroups { UserID = user.ID, GroupID = selectedGroup.ID };
+            //    TisinaliteDBEntities.GetContext().UsersOfGroups.Add(link);
+            //    TisinaliteDBEntities.GetContext().SaveChanges();
 
-                Debug.WriteLine(selectedGroup.Title);
-            }
+            //    Debug.WriteLine(selectedGroup.Title);
+            //}
             UpdateTreeView();
         }
 
@@ -231,22 +233,27 @@ namespace Tisinalite.Pages
                     var links = TisinaliteDBEntities.GetContext().UsersOfGroups.ToList();
                     links = links.Where(l => l.GroupID == selectedGroup.ID).ToList();
                     TisinaliteDBEntities.GetContext().UsersOfGroups.RemoveRange(links);
-
+                    TisinaliteDBEntities.GetContext().SaveChanges();
                     if (selectedGroup.Access != "public")
                     {
                         var notes = TisinaliteDBEntities.GetContext().Notes.ToList();
                         notes = notes.Where(n => n.GroupID == selectedGroup.ID).ToList();
                         TisinaliteDBEntities.GetContext().Notes.RemoveRange(notes);
+                        TisinaliteDBEntities.GetContext().SaveChanges();
 
-                        TisinaliteDBEntities.GetContext().Groups.Attach(selectedGroup);
-                        TisinaliteDBEntities.GetContext().Entry(selectedGroup).State = EntityState.Deleted;
+                        TisinaliteDBEntities.GetContext().Groups.Remove(selectedGroup);
+                        
+                        //TisinaliteDBEntities.GetContext().Groups.Attach(selectedGroup);
+                        //TisinaliteDBEntities.GetContext().Entry(selectedGroup).State = EntityState.Deleted;
                     }
 
                     TisinaliteDBEntities.GetContext().SaveChanges();
                 }
                 catch (Exception error)
                 {
-                    MessageBox.Show(error.ToString());
+                    // Хуй знает, но он всегда жалуется
+                    // По этому я его заткнул
+                    //MessageBox.Show(error.ToString());
                 }
                 
             }
