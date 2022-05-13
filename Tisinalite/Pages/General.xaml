@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
+      xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
       xmlns:local="clr-namespace:Tisinalite.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -82,11 +83,15 @@
             </TreeView.Resources>
         </TreeView>
 
-        <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-        <TextBox x:Name="tbEditor" AcceptsReturn="True" AcceptsTab="True" TextWrapping="Wrap" Grid.Column="2" Grid.RowSpan="2" Background="#336666" Foreground="White"/>
-        <GridSplitter Grid.Column="3" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
-        <mdxam:MarkdownScrollViewer x:Name="Markdownview" Grid.Column="4" Grid.RowSpan="2">
+        <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3" 
+                      HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
+        <avalonedit:TextEditor x:Name="tbEditor" Grid.Column="2" SyntaxHighlighting="MarkDown"
+                               Grid.RowSpan="2" FontSize="18pt" Background="#BBE0D0" 
+                               HorizontalScrollBarVisibility="Auto" WordWrap="True"/>
 
+        <GridSplitter Grid.Column="3" ShowsPreview="False" Width="3" HorizontalAlignment="Center" 
+                      VerticalAlignment="Stretch" Grid.RowSpan="2"/>
+        <mdxam:MarkdownScrollViewer x:Name="Markdownview" Grid.Column="4" Grid.RowSpan="2">
         </mdxam:MarkdownScrollViewer>
     </Grid>
 </Page>

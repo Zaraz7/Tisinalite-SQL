@@ -13,6 +13,7 @@
           <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MasterID" Type="int" Nullable="false" />
           <Property Name="Access" Type="varchar" MaxLength="10" />
+          <Property Name="Password" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Images">
           <Key>
@@ -21,6 +22,12 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BinaryFile" Type="varbinary(max)" Nullable="false" />
         </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6013: Первичный ключ в таблице или представлении "TisinaliteDB.dbo.Keys" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
+        <EntityType Name="Keys">
+          <Property Name="ID" Type="nchar" MaxLength="10" />
+          <Property Name="KeyPass" Type="varchar" MaxLength="50" />
+        </EntityType>-->
         <EntityType Name="Notes">
           <Key>
             <PropertyRef Name="ID" />
@@ -141,6 +148,7 @@
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MasterID" Type="Int32" Nullable="false" />
           <Property Name="Access" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Groups_Users" FromRole="Groups" ToRole="Users" />
           <NavigationProperty Name="Notes" Relationship="Self.FK_Notes_Groups" FromRole="Groups" ToRole="Notes" />
           <NavigationProperty Name="UsersOfGroups" Relationship="Self.FK_UsersOfGroups_Groups" FromRole="Groups" ToRole="UsersOfGroups" />
@@ -277,6 +285,7 @@
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="MasterID" ColumnName="MasterID" />
                 <ScalarProperty Name="Access" ColumnName="Access" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
