@@ -197,22 +197,6 @@ namespace Tisinalite.Pages
         {
             var input = new GroupEdit(user.ID);
             input.ShowDialog();
-            //Input input = new Input();
-            //input.ShowDialog();
-            //Debug.WriteLine(input.Result);
-            //if (input.Result)
-            //{
-            //    selectedGroup = new Groups { Title = input.Entry, MasterID = user.ID, Access = "private" };
-            //    TisinaliteDBEntities.GetContext().Groups.Add(selectedGroup);
-            //    TisinaliteDBEntities.GetContext().SaveChanges();
-            //    Debug.WriteLine(selectedGroup.ID);
-
-            //    var link = new UsersOfGroups { UserID = user.ID, GroupID = selectedGroup.ID };
-            //    TisinaliteDBEntities.GetContext().UsersOfGroups.Add(link);
-            //    TisinaliteDBEntities.GetContext().SaveChanges();
-
-            //    Debug.WriteLine(selectedGroup.Title);
-            //}
             UpdateTreeView();
         }
 
@@ -245,9 +229,6 @@ namespace Tisinalite.Pages
                         TisinaliteDBEntities.GetContext().SaveChanges();
 
                         TisinaliteDBEntities.GetContext().Groups.Remove(selectedGroup);
-                        
-                        //TisinaliteDBEntities.GetContext().Groups.Attach(selectedGroup);
-                        //TisinaliteDBEntities.GetContext().Entry(selectedGroup).State = EntityState.Deleted;
                     }
 
                     TisinaliteDBEntities.GetContext().SaveChanges();
