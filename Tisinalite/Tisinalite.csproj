@@ -144,9 +144,6 @@
     <Compile Include="Pages\GroupEdit.xaml.cs">
       <DependentUpon>GroupEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\GroupEditor.xaml.cs">
-      <DependentUpon>GroupEditor.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Input.xaml.cs">
       <DependentUpon>Input.xaml</DependentUpon>
     </Compile>
@@ -180,10 +177,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\GroupEdit.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\GroupEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

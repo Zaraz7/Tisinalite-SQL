@@ -27,10 +27,10 @@ namespace Tisinalite.Pages
             InitializeComponent();
 
             UpdateTreeView();
-            Binding binding = new Binding();
-            binding.ElementName = "tbEditor";
-            binding.Path = new PropertyPath("Text");
-            Markdownview.SetBinding(MarkdownScrollViewer.MarkdownProperty, binding);
+            //Binding binding = new Binding();
+            //binding.ElementName = "tbEditor";
+            //binding.Path = new PropertyPath("Text");
+            //Markdownview.SetBinding(MarkdownScrollViewer.MarkdownProperty, binding);
 
         }
         public void SaveSettings()
@@ -126,6 +126,7 @@ namespace Tisinalite.Pages
         }
         public void SaveNote()
         {
+            Debug.WriteLine(tbEditor.Text);
             if (openNote.ID == 0)
                 NewNote();
             try
@@ -138,6 +139,7 @@ namespace Tisinalite.Pages
             {
                 MessageBox.Show(error.ToString());
             }
+            Markdownview.Markdown = tbEditor.Text;
         }
         private void OpenNote(Notes note)
         {
@@ -145,6 +147,7 @@ namespace Tisinalite.Pages
                 SaveNote();
             openNote = note;
             tbEditor.Text = note.Contents;
+            Markdownview.Markdown = tbEditor.Text;
         }
 
         private void tvNote_Changed(object sender, RoutedPropertyChangedEventArgs<object> e)
@@ -249,7 +252,7 @@ namespace Tisinalite.Pages
 
                     TisinaliteDBEntities.GetContext().SaveChanges();
                 }
-                catch (Exception error)
+                catch
                 {
                     // Хуй знает, но он всегда жалуется
                     // По этому я его заткнул
