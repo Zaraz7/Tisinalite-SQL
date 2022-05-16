@@ -15,24 +15,23 @@ using System.Diagnostics;
 
 namespace Tisinalite.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для GroupEdit.xaml
-    /// </summary>
     public partial class GroupEdit : Window
     {
         Groups group;
-        int masterID;
         public GroupEdit(int _masterID, Groups _group = null)
         {
             if (_group == null)
             {
-                group = new Groups();
-                masterID = _masterID;
+                group = new Groups { MasterID = _masterID };
             }
             else
+            {
+                cbAccess.IsEnabled = false;
                 group = _group;
+            }
 
             InitializeComponent();
+            DataContext = group;
         }
 
         private void SaveGroup_Click(object sender, RoutedEventArgs e)
@@ -47,19 +46,36 @@ namespace Tisinalite.Pages
             Debug.WriteLine(group.Title + " " + group.Access);
             if (group.ID == 0)
             {
-                try { 
-                group.MasterID = masterID;
-                TisinaliteDBEntities.GetContext().Groups.Add(group);
-                TisinaliteDBEntities.GetContext().SaveChanges();
+                switch (cbAccess.SelectedIndex)
+                {
+                    case 0:
+                        group.Access = "private";
+                        break;
+                    case 1:
+                        group.Access = "public";
+                        break;
+                }
+                try
+                {
+                    TisinaliteDBEntities.GetContext().Groups.Add(group);
+                    TisinaliteDBEntities.GetContext().SaveChanges();
 
-                TisinaliteDBEntities.GetContext().UsersOfGroups.Add(new UsersOfGroups { GroupID = group.ID, UserID = masterID});
-                TisinaliteDBEntities.GetContext().SaveChanges();
+                    TisinaliteDBEntities.GetContext().UsersOfGroups.Add(new UsersOfGroups { GroupID = group.ID, UserID = group.MasterID });
+                    TisinaliteDBEntities.GetContext().SaveChanges();
 
-                if (group.Access == "public")
-                    {
+                    if (group.Access == "public")
                         tbID.Text = $"Код группы: {group.ID}";
-                        tbID.Visibility = Visibility.Visible;
-                    }
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.ToString());
+                }
+            }
+            else
+            {
+                try
+                {
+                    TisinaliteDBEntities.GetContext().SaveChanges();
                 }
                 catch (Exception error)
                 {

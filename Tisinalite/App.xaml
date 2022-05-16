@@ -23,6 +23,9 @@
             <Setter Property="Height" Value="30"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
         <Style TargetType="Frame">
             <Setter Property="NavigationUIVisibility" Value="Hidden"/>
         </Style>

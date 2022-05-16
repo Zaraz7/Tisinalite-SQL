@@ -15,16 +15,16 @@ namespace Tisinalite
     
     public partial class TisinaliteDBEntities : DbContext
     {
-        private static TisinaliteDBEntities _context;
+        private static TisinaliteDBEntities _contex;
         public TisinaliteDBEntities()
             : base("name=TisinaliteDBEntities")
         {
         }
         public static TisinaliteDBEntities GetContext()
         {
-            if (_context == null)
-                _context = new TisinaliteDBEntities();
-            return _context;
+            if (_contex == null)
+                _contex = new TisinaliteDBEntities();
+            return _contex;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

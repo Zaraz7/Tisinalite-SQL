@@ -34,11 +34,8 @@ namespace Tisinalite.Pages
             //Markdownview.SetBinding(MarkdownScrollViewer.MarkdownProperty, binding);
 
         }
-        public void SaveSettings()
-        {
-            _settings.Save();
-        }
 
+        // Executes
         private void NewExecute(object sender, ExecutedRoutedEventArgs e)
         {
 
@@ -71,6 +68,20 @@ namespace Tisinalite.Pages
         {
             SaveExecute(sender, e);
             Application.Current.Shutdown();
+        }
+        private void PasteExecute(object sender, ExecutedRoutedEventArgs e)
+        {
+            tbEditor.Paste();
+        }
+        // Execute cause
+        private void CanDeleteExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = openNote.ID != 0;
+        }
+        // Any functions
+        public void SaveSettings()
+        {
+            _settings.Save();
         }
         private void UpdateTreeView()
         {
@@ -151,6 +162,7 @@ namespace Tisinalite.Pages
             Markdownview.Markdown = tbEditor.Text;
         }
 
+        // Events
         private void tvNote_Changed(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             TreeViewItem item = (TreeViewItem)tvNotes.SelectedItem;
@@ -174,21 +186,12 @@ namespace Tisinalite.Pages
 
         }
 
-        private void CanDeleteExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = openNote.ID != 0;
-        }
-
         private void ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
         }
 
-        private void PasteExecute(object sender, ExecutedRoutedEventArgs e)
-        {
-            tbEditor.Paste();
-        }
-
+        // Clicks
         private void Image_Click(object sender, RoutedEventArgs e)
         {
 

@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="TisinaliteDBModel.Notes" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TisinaliteDBModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TisinaliteDBModel.Users" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TisinaliteDBModel.UsersOfGroups" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TisinaliteDBModel.UsersOfGroups" Width="1.5" PointX="2.125" PointY="0.625" IsExpanded="true" />
         <AssociationConnector Association="TisinaliteDBModel.FK_Groups_Users" ManuallyRouted="false" />
         <AssociationConnector Association="TisinaliteDBModel.FK_Notes_Groups" ManuallyRouted="false" />
         <AssociationConnector Association="TisinaliteDBModel.FK_UsersOfGroups_Groups" ManuallyRouted="false" />

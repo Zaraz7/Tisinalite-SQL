@@ -21,13 +21,13 @@
             <ColumnDefinition Width="130"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="Название группы" Grid.Row="1"/>
-        <TextBox x:Name="tbTitle" Grid.Row="1" Grid.Column="1"/>
+        <TextBox x:Name="tbTitle" Text="{Binding Title}" Grid.Row="1" Grid.Column="1"/>
         <TextBlock Text="Доступ" Grid.Row="2" Grid.Column="0"/>
         <ComboBox x:Name="cbAccess" Grid.Row="2" Grid.Column="1" SelectedIndex="0">
             <ComboBoxItem Content="Приватный" Tag="private"/>
             <ComboBoxItem Content="Публичный" Tag="public"/>
         </ComboBox>
-        <TextBlock x:Name="tbID" Grid.Row="3" Grid.ColumnSpan="2" Visibility="Hidden"/>
+        <TextBox x:Name="tbID" Grid.Row="4" Grid.ColumnSpan="2" IsReadOnly="True"/>
         <Button Grid.Row="5" Grid.Column="2" Click="SaveGroup_Click">
             <TextBlock Text="Сохранить" Foreground="White"/>
         </Button>
