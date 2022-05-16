@@ -21,6 +21,7 @@ namespace Tisinalite.Pages
         Users user;
         Notes openNote = new Notes();
         Groups selectedGroup = new Groups();
+        TisinaliteDBEntities db = new TisinaliteDBEntities();
         public General(Users _user)
         {
             user = _user;
@@ -242,6 +243,29 @@ namespace Tisinalite.Pages
                 
             }
             UpdateTreeView();
+        }
+
+        private void Connect_Click(object sender, RoutedEventArgs e)
+        {
+            var input = new Input ( "Введите ID группы", "Подключение" );
+            input.ShowDialog();
+            if (!input.Result)
+                return;
+            var id = int.Parse(input.Entry);
+            var group = db.Groups.FirstOrDefault(g => g.ID == id);
+            if (group == null || group.Access != "public")
+            {
+                MessageBox.Show("Нет публичной папки с таким именем");
+                return;
+            }
+            var link = new UsersOfGroups { UserID = user.ID, GroupID = id };
+            TisinaliteDBEntities.GetContext().UsersOfGroups.Add(link);
+            TisinaliteDBEntities.GetContext().SaveChanges();
+            UpdateTreeView();
+        }
+        private void Disconnect_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

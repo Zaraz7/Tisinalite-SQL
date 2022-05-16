@@ -11,15 +11,17 @@ namespace Tisinalite.Pages
     {
         public string Entry;
         public bool Result = false;
-        public Input()
+        public Input(string messegeText = "Введите имя заметки", string title = "Введите данные")
         {
             InitializeComponent();
+            messege.Text = messegeText;
+            Title = title;
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
             Entry = inputEntry.Text;
-            if ( Entry.Length < 2 || Entry.Contains(@"\"))
+            if ( string.IsNullOrWhiteSpace(Entry) || Entry.Contains(@"\"))
             {
                 Warning();
                 return;

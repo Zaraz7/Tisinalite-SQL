@@ -69,6 +69,8 @@
                 </MenuItem.Header>
                 <MenuItem Header="Новая папка" Click="NewGroup_Click"/>
                 <MenuItem Header="Удалить папку" Click="DeleteGroup_Click"/>
+                <MenuItem Header="Подключиться к папке" Click="Connect_Click"/>
+                <MenuItem Header="Отключиться от папки" Click="Disconnect_Click"/>
             </MenuItem>
         </Menu>
         
