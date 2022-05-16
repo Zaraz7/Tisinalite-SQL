@@ -66,8 +66,10 @@ namespace Tisinalite.Pages
         }
         private void CloseExecute(object sender, ExecutedRoutedEventArgs e)
         {
-            SaveExecute(sender, e);
-            Application.Current.Shutdown();
+            if (MessageBox.Show("Вы точно хотите выйти? Все несохраненные изменения будут потеряны.", "Выход", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                Application.Current.Shutdown();
+            }
         }
         private void PasteExecute(object sender, ExecutedRoutedEventArgs e)
         {
@@ -268,7 +270,32 @@ namespace Tisinalite.Pages
         }
         private void Disconnect_Click(object sender, RoutedEventArgs e)
         {
+            if (selectedGroup.ID == 0)
+            {
+                MessageBox.Show("Сначало выберети папку.");
+                return;
+            }
+            if (selectedGroup.Access == "private" || selectedGroup.Access == "personal")
+            {
+                MessageBox.Show("Приватные папки не отключаются. Они удаляются");
+                return;
+            }
+            if (selectedGroup.MasterID == user.ID)
+            {
+                MessageBox.Show("Вы не можете отключиться от своей созданной папки (это пока не реализовано), но вы можете её удалить.");
+                return;
+            }
+            var link = db.UsersOfGroups.FirstOrDefault(l => l.UserID == user.ID && l.GroupID == selectedGroup.ID);
+            Debug.WriteLine(link.ID);
 
+            TisinaliteDBEntities.GetContext().UsersOfGroups.Attach(link);
+            TisinaliteDBEntities.GetContext().Entry(link).State = EntityState.Deleted;
+            TisinaliteDBEntities.GetContext().SaveChanges();
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            Global.MainFrame.GoBack();
         }
     }
 }

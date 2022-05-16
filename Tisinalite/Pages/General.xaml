@@ -40,7 +40,8 @@
                         </Image.Effect>
                     </Image>
                 </MenuItem.Header>
-                <MenuItem Header="Выход"/>
+                <MenuItem Header="Выйти" Click="LogOut_Click"/>
+                <MenuItem Command="Close"/>
             </MenuItem>
             <MenuItem Height="50" Width="50">
                 <MenuItem.Header>
@@ -49,8 +50,6 @@
                 <MenuItem Command="New"/>
                 <MenuItem Command="Save"/>
                 <MenuItem Command="Delete"/>
-                <Separator/>
-                <MenuItem Command="Close"/>
             </MenuItem>
             <MenuItem Height="50" Width="50">
                 <MenuItem.Header>
@@ -70,7 +69,7 @@
                 <MenuItem Header="Новая папка" Click="NewGroup_Click"/>
                 <MenuItem Header="Удалить папку" Click="DeleteGroup_Click"/>
                 <MenuItem Header="Подключиться к папке" Click="Connect_Click"/>
-                <MenuItem Header="Отключиться от папки" Click="Disconnect_Click"/>
+                <MenuItem Header="Отключиться от папки" Click="Disconnect_Click" Foreground="Red"/>
             </MenuItem>
         </Menu>
         
