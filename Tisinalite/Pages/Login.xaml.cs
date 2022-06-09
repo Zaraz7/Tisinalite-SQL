@@ -44,5 +44,10 @@ namespace Tisinalite.Pages
             }
             
         }
+
+        private void Regist_Click(object sender, RoutedEventArgs e)
+        {
+            Global.MainFrame.Navigate(new Regist());
+        }
     }
 }

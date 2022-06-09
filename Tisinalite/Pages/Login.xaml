@@ -8,7 +8,15 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Login">
 
-    <Grid>
+    <DockPanel>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top">
+            <Button Height="auto" IsEnabled="False">
+                <TextBlock Text="Авторизация" Foreground="Gray" Margin="5"/>
+            </Button>
+            <Button Height="auto" Click="Regist_Click">
+                <TextBlock Text="Регистрация" Foreground="White" Margin="5"/>
+            </Button>
+        </StackPanel>
         <StackPanel Width="100" VerticalAlignment="Center">
             <TextBlock Text="Логин"/>
             <TextBox x:Name="tbLogin"/>
@@ -21,5 +29,5 @@
                 <TextBlock Text="Войти" Foreground="White"/>
             </Button>
         </StackPanel>
-    </Grid>
+    </DockPanel>
 </Page>
