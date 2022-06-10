@@ -45,7 +45,11 @@
             </MenuItem>
             <MenuItem Height="50" Width="50">
                 <MenuItem.Header>
-                    <Image Source="/Tisinalite;component/Resources/file.ico"></Image>
+                    <Image Source="/Tisinalite;component/Resources/file.ico">
+                        <Image.Effect>
+                            <DropShadowEffect ShadowDepth="1" Color="#FFB8B8B8"/>
+                        </Image.Effect>
+                    </Image>
                 </MenuItem.Header>
                 <MenuItem Command="New"/>
                 <MenuItem Command="Save"/>
@@ -53,10 +57,14 @@
             </MenuItem>
             <MenuItem Height="50" Width="50">
                 <MenuItem.Header>
-                    <Image Source="/Tisinalite;component/Resources/paste.ico"/>
+                    <Image Source="/Tisinalite;component/Resources/paste.ico">
+                        <Image.Effect>
+                            <DropShadowEffect ShadowDepth="1" Color="#FFB8B8B8"/>
+                        </Image.Effect>
+                    </Image>
                 </MenuItem.Header>
                 <MenuItem Command="Paste"/>
-                <MenuItem Header="Вставить изображение" Click="Image_Click"/>
+                <!--<MenuItem Header="Вставить изображение" Click="Image_Click"/>-->
             </MenuItem>
             <MenuItem Height="50" Width="50">
                 <MenuItem.Header>
@@ -69,7 +77,7 @@
                 <MenuItem Header="Новая папка" Click="NewGroup_Click"/>
                 <MenuItem Header="Удалить папку" Click="DeleteGroup_Click"/>
                 <MenuItem Header="Подключиться к папке" Click="Connect_Click"/>
-                <MenuItem Header="Отключиться от папки" Click="Disconnect_Click" Foreground="Red"/>
+                <MenuItem Header="Отключиться от папки" Click="Disconnect_Click"/>
             </MenuItem>
         </Menu>
         

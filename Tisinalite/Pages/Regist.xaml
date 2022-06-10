@@ -11,6 +11,9 @@
     <DockPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top">
             <Button Height="auto" Click="Login_Click">
+                <Button.Effect>
+                    <DropShadowEffect></DropShadowEffect>
+                </Button.Effect>
                 <TextBlock Text="Авторизация" Foreground="White" Margin="5"/>
             </Button>
             <Button Height="auto" IsEnabled="False">

@@ -11,9 +11,12 @@
     <DockPanel>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top">
             <Button Height="auto" IsEnabled="False">
-                <TextBlock Text="Авторизация" Foreground="Gray" Margin="5"/>
+                <TextBlock Text="Авторизация" Foreground="Green" Margin="5"/>
             </Button>
             <Button Height="auto" Click="Regist_Click">
+                <Button.Effect>
+                    <DropShadowEffect></DropShadowEffect>
+                </Button.Effect>
                 <TextBlock Text="Регистрация" Foreground="White" Margin="5"/>
             </Button>
         </StackPanel>
@@ -22,7 +25,7 @@
             <TextBox x:Name="tbLogin"/>
             <TextBlock Text="Пароль"/>
             <PasswordBox x:Name="pbPassword" Margin="0,0,0,15"/>
-            <Button Click="Login_Click">
+            <Button Click="Login_Click" Height="auto">
                 <Button.Effect>
                     <DropShadowEffect></DropShadowEffect>
                 </Button.Effect>
