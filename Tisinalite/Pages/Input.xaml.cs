@@ -14,6 +14,7 @@ namespace Tisinalite.Pages
         public Input(string messegeText = "Введите имя заметки", string title = "Введите данные")
         {
             InitializeComponent();
+            // Опциональная информация, вводимые при создание окна
             messege.Text = messegeText;
             Title = title;
         }
@@ -29,6 +30,7 @@ namespace Tisinalite.Pages
             Result = true;
             this.Close();
         }
+        // Если значения будут неправельными, то красным по белому будет выведено сообщение об ошибке
         public void Warning(string warningText = "Поле было пустым, или имело специальные символы")
         {
             warning.Text = warningText;

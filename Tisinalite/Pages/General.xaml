@@ -30,8 +30,9 @@
             <RowDefinition Height="55"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
-        <Menu Grid.Row="0">
+
+        <!-- Меню с иконками -->
+            <Menu Grid.Row="0">
             <MenuItem Height="50" Width="50">
                 <MenuItem.Header>
                     <Image Source="/Tisinalite;component/Resources/user.ico" >
@@ -81,6 +82,7 @@
             </MenuItem>
         </Menu>
         
+        <!-- Список групп и заметок-->
         <TreeView Name="tvNotes" Grid.Column="0" Grid.Row="1" SelectedItemChanged="tvNote_Changed" Background="#333">
             <TreeView.Resources>
                 <Style TargetType="TreeViewItem">
@@ -94,12 +96,13 @@
 
         <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3" 
                       HorizontalAlignment="Center" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
+        <!-- Редактор текста -->
         <avalonedit:TextEditor x:Name="tbEditor" Grid.Column="2" SyntaxHighlighting="MarkDown"
                                Grid.RowSpan="2" FontSize="18pt" Background="#BBE0D0" 
                                HorizontalScrollBarVisibility="Auto" WordWrap="True"/>
-
         <GridSplitter Grid.Column="3" ShowsPreview="False" Width="3" HorizontalAlignment="Center" 
                       VerticalAlignment="Stretch" Grid.RowSpan="2"/>
+        <!-- Предосмотр текста-->
         <mdxam:MarkdownScrollViewer x:Name="Markdownview" Markdown="{Binding ElementName=tbEditor,Path=Text}" Grid.Column="4" Grid.RowSpan="2"/>
     </Grid>
 </Page>

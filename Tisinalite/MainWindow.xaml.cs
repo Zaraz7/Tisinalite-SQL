@@ -3,20 +3,16 @@
 
 namespace Tisinalite
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
+    // Это главное окно, где перелистываются почти все страницы
     public partial class MainWindow : Window
     {
         Pages.Login login;
         public MainWindow()
         {
             InitializeComponent();
-
-            login = new Pages.Login();
-            MainFrame.Navigate(login);
+            // Первой страницей будет открываться авторизация
+            MainFrame.Navigate(new Pages.Login());
             Global.MainFrame = MainFrame;
-
         }
 
         private void ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)

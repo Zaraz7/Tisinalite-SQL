@@ -27,11 +27,13 @@ namespace Tisinalite.Pages
 
         private void Login_Click(object sender, RoutedEventArgs e)
         {
+            // Проверка на содержание пустых полей
             if (string.IsNullOrEmpty(tbLogin.Text) || string.IsNullOrEmpty(pbPassword.Password))
             {
                 MessageBox.Show("Сначало заполните все поля.");
                 return;
             }
+            // Попытка авторизироваться
             using (var db = new TisinaliteDBEntities())
             {
                 var user = db.Users.AsNoTracking().FirstOrDefault(u => u.Login == tbLogin.Text && u.Password == pbPassword.Password);
@@ -40,7 +42,8 @@ namespace Tisinalite.Pages
                     MessageBox.Show("Неверный логин или пароль.");
                     return;
                 }
-                Global.MainFrame.Navigate(new Pages.General(user));
+                // Открытие главной страницы с авторизированными данными 
+                Global.MainFrame.Navigate(new General(user));
             }
             
         }

@@ -21,6 +21,7 @@
             </Button>
         </StackPanel>
         <Grid>
+            <!-- Правка стиелей для Сетки по центру -->
             <Grid.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="FontSize" Value="15"/>

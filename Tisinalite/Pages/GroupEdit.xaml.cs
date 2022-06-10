@@ -20,6 +20,7 @@ namespace Tisinalite.Pages
         Groups group;
         public GroupEdit(int _masterID, Groups _group = null)
         {
+            // Проверка на наличие группы в БД
             if (_group == null)
             {
                 group = new Groups { MasterID = _masterID };
@@ -36,6 +37,7 @@ namespace Tisinalite.Pages
 
         private void SaveGroup_Click(object sender, RoutedEventArgs e)
         {
+            // Запрещаем вписывать пустые поля
             if (string.IsNullOrWhiteSpace(tbTitle.Text))
             {
                 MessageBox.Show("Неправильное имя");
@@ -46,6 +48,7 @@ namespace Tisinalite.Pages
             Debug.WriteLine(group.Title + " " + group.Access);
             if (group.ID == 0)
             {
+                // Разграничение доступности в зависимости от выбранного параметра в combobox
                 switch (cbAccess.SelectedIndex)
                 {
                     case 0:
@@ -55,6 +58,7 @@ namespace Tisinalite.Pages
                         group.Access = "public";
                         break;
                 }
+                // Попытка сохранить значения
                 try
                 {
                     TisinaliteDBEntities.GetContext().Groups.Add(group);
