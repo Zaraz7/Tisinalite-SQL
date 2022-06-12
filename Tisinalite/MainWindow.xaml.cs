@@ -6,7 +6,6 @@ namespace Tisinalite
     // Это главное окно, где перелистываются почти все страницы
     public partial class MainWindow : Window
     {
-        Pages.Login login;
         public MainWindow()
         {
             InitializeComponent();
