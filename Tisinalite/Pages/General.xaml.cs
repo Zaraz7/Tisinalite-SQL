@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Data.Entity;
 using MdXaml;
 using Microsoft.Win32;
+using System.IO;
 
 namespace Tisinalite.Pages
 {
@@ -314,7 +315,25 @@ namespace Tisinalite.Pages
 
         private void Export_Click(object sender, RoutedEventArgs e)
         {
+            //Stream myStream;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
 
+            saveFileDialog.Filter = "Текстовый файл (*.txt)|*.txt|MarkDown файл (*.md)|*.md|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 2;
+            saveFileDialog.DefaultExt = "md";
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                if (saveFileDialog.FileName != "")
+                {
+                    using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName))
+                    {
+                        writer.WriteLine(tbEditor.Text);
+                        writer.Close();
+                    }
+                }
+            }
         }
     }
 }
