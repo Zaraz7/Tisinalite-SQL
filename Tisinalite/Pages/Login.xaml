@@ -15,7 +15,7 @@
             </Button>
             <Button Height="auto" Click="Regist_Click">
                 <Button.Effect>
-                    <DropShadowEffect></DropShadowEffect>
+                    <DropShadowEffect BlurRadius="0" Opacity="0.7"></DropShadowEffect>
                 </Button.Effect>
                 <TextBlock Text="Регистрация" Foreground="White" Margin="5"/>
             </Button>
@@ -27,7 +27,7 @@
             <PasswordBox x:Name="pbPassword" Margin="0,0,0,15"/>
             <Button Click="Login_Click" Height="auto">
                 <Button.Effect>
-                    <DropShadowEffect></DropShadowEffect>
+                    <DropShadowEffect BlurRadius="0" Opacity="0.7"></DropShadowEffect>
                 </Button.Effect>
                 <TextBlock Text="Войти" Foreground="White"/>
             </Button>

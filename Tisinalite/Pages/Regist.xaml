@@ -12,7 +12,7 @@
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" DockPanel.Dock="Top">
             <Button Height="auto" Click="Login_Click">
                 <Button.Effect>
-                    <DropShadowEffect></DropShadowEffect>
+                    <DropShadowEffect BlurRadius="0" Opacity="0.7"></DropShadowEffect>
                 </Button.Effect>
                 <TextBlock Text="Авторизация" Foreground="White" Margin="5"/>
             </Button>
@@ -58,7 +58,7 @@
 
             <Button Height="35" Click="Regist_Click" Grid.Column="1" Grid.ColumnSpan="3" Width="110" Grid.Row="5">
                 <Button.Effect>
-                    <DropShadowEffect></DropShadowEffect>
+                    <DropShadowEffect BlurRadius="0" Opacity="0.7"></DropShadowEffect>
                 </Button.Effect>
                 <TextBlock Text="Регистрация" Foreground="White" Margin="5"/>
             </Button>
