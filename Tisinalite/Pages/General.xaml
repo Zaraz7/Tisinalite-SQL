@@ -54,6 +54,7 @@
                 </MenuItem.Header>
                 <MenuItem Command="New"/>
                 <MenuItem Command="Save"/>
+                <MenuItem Header="Экспортировать" Click="Export_Click"/>
                 <MenuItem Command="Delete"/>
             </MenuItem>
             <MenuItem Height="50" Width="50">
@@ -65,7 +66,7 @@
                     </Image>
                 </MenuItem.Header>
                 <MenuItem Command="Paste"/>
-                <!--<MenuItem Header="Вставить изображение" Click="Image_Click"/>-->
+                <MenuItem Header="Вставить изображение" Click="Image_Click"/>
             </MenuItem>
             <MenuItem Height="50" Width="50">
                 <MenuItem.Header>

@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Diagnostics;
 using System.Data.Entity;
 using MdXaml;
+using Microsoft.Win32;
 
 namespace Tisinalite.Pages
 {
@@ -28,10 +29,10 @@ namespace Tisinalite.Pages
             InitializeComponent();
 
             UpdateTreeView();
-            //Binding binding = new Binding();
-            //binding.ElementName = "tbEditor";
-            //binding.Path = new PropertyPath("Text");
-            //Markdownview.SetBinding(MarkdownScrollViewer.MarkdownProperty, binding);
+            Binding binding = new Binding();
+            binding.ElementName = "tbEditor";
+            binding.Path = new PropertyPath("Text");
+            Markdownview.SetBinding(MarkdownScrollViewer.MarkdownProperty, binding);
 
         }
 
@@ -196,7 +197,20 @@ namespace Tisinalite.Pages
         // Clicks
         private void Image_Click(object sender, RoutedEventArgs e)
         {
+            var fileContent = string.Empty;
+            var filePath = string.Empty;
 
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.Filter = "Файлы изображений(*.PNG;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF;*.PNG|Все файлы (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                filePath = openFileDialog.FileName;
+                tbEditor.SelectedText = $" ![Название картинки]({filePath}) ";
+            }
         }
 
         private void NewGroup_Click(object sender, RoutedEventArgs e)
@@ -296,6 +310,11 @@ namespace Tisinalite.Pages
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
             Global.MainFrame.GoBack();
+        }
+
+        private void Export_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
