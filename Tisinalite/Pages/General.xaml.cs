@@ -196,29 +196,47 @@ namespace Tisinalite.Pages
         }
 
         // Clicks
-        private void Image_Click(object sender, RoutedEventArgs e)
+        private void Connect_Click(object sender, RoutedEventArgs e)
         {
-            var fileContent = string.Empty;
-            var filePath = string.Empty;
-
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            openFileDialog.Filter = "Файлы изображений(*.PNG;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF;*.PNG|Все файлы (*.*)|*.*";
-            openFileDialog.FilterIndex = 1;
-            openFileDialog.RestoreDirectory = true;
-
-            if (openFileDialog.ShowDialog() == true)
-            {
-                filePath = openFileDialog.FileName;
-                tbEditor.SelectedText = $" ![Название картинки]({filePath}) ";
-            }
-        }
-
-        private void NewGroup_Click(object sender, RoutedEventArgs e)
-        {
-            var input = new GroupEdit(user.ID);
+            var input = new Input("Введите ID группы", "Подключение");
             input.ShowDialog();
+            if (!input.Result)
+                return;
+            var id = int.Parse(input.Entry);
+            var group = db.Groups.FirstOrDefault(g => g.ID == id);
+            if (group == null || group.Access != "public")
+            {
+                MessageBox.Show("Нет публичной папки с таким именем");
+                return;
+            }
+            var link = new UsersOfGroups { UserID = user.ID, GroupID = id };
+            TisinaliteDBEntities.GetContext().UsersOfGroups.Add(link);
+            TisinaliteDBEntities.GetContext().SaveChanges();
             UpdateTreeView();
+        }
+        private void Disconnect_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedGroup.ID == 0)
+            {
+                MessageBox.Show("Сначало выберети папку.");
+                return;
+            }
+            if (selectedGroup.Access == "private" || selectedGroup.Access == "personal")
+            {
+                MessageBox.Show("Приватные папки не отключаются. Они удаляются");
+                return;
+            }
+            if (selectedGroup.MasterID == user.ID)
+            {
+                MessageBox.Show("Вы не можете отключиться от своей созданной папки (это пока не реализовано), но вы можете её удалить.");
+                return;
+            }
+            var link = db.UsersOfGroups.FirstOrDefault(l => l.UserID == user.ID && l.GroupID == selectedGroup.ID);
+            Debug.WriteLine(link.ID);
+
+            TisinaliteDBEntities.GetContext().UsersOfGroups.Attach(link);
+            TisinaliteDBEntities.GetContext().Entry(link).State = EntityState.Deleted;
+            TisinaliteDBEntities.GetContext().SaveChanges();
         }
 
         private void DeleteGroup_Click(object sender, RoutedEventArgs e)
@@ -260,59 +278,9 @@ namespace Tisinalite.Pages
                     // По этому я его заткнул
                     //MessageBox.Show(error.ToString());
                 }
-                
             }
             UpdateTreeView();
         }
-
-        private void Connect_Click(object sender, RoutedEventArgs e)
-        {
-            var input = new Input ( "Введите ID группы", "Подключение" );
-            input.ShowDialog();
-            if (!input.Result)
-                return;
-            var id = int.Parse(input.Entry);
-            var group = db.Groups.FirstOrDefault(g => g.ID == id);
-            if (group == null || group.Access != "public")
-            {
-                MessageBox.Show("Нет публичной папки с таким именем");
-                return;
-            }
-            var link = new UsersOfGroups { UserID = user.ID, GroupID = id };
-            TisinaliteDBEntities.GetContext().UsersOfGroups.Add(link);
-            TisinaliteDBEntities.GetContext().SaveChanges();
-            UpdateTreeView();
-        }
-        private void Disconnect_Click(object sender, RoutedEventArgs e)
-        {
-            if (selectedGroup.ID == 0)
-            {
-                MessageBox.Show("Сначало выберети папку.");
-                return;
-            }
-            if (selectedGroup.Access == "private" || selectedGroup.Access == "personal")
-            {
-                MessageBox.Show("Приватные папки не отключаются. Они удаляются");
-                return;
-            }
-            if (selectedGroup.MasterID == user.ID)
-            {
-                MessageBox.Show("Вы не можете отключиться от своей созданной папки (это пока не реализовано), но вы можете её удалить.");
-                return;
-            }
-            var link = db.UsersOfGroups.FirstOrDefault(l => l.UserID == user.ID && l.GroupID == selectedGroup.ID);
-            Debug.WriteLine(link.ID);
-
-            TisinaliteDBEntities.GetContext().UsersOfGroups.Attach(link);
-            TisinaliteDBEntities.GetContext().Entry(link).State = EntityState.Deleted;
-            TisinaliteDBEntities.GetContext().SaveChanges();
-        }
-
-        private void LogOut_Click(object sender, RoutedEventArgs e)
-        {
-            Global.MainFrame.GoBack();
-        }
-
         private void Export_Click(object sender, RoutedEventArgs e)
         {
             //Stream myStream;
@@ -335,5 +303,35 @@ namespace Tisinalite.Pages
                 }
             }
         }
+        private void Image_Click(object sender, RoutedEventArgs e)
+        {
+            var fileContent = string.Empty;
+            var filePath = string.Empty;
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.Filter = "Файлы изображений(*.PNG;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF;*.PNG|Все файлы (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                filePath = openFileDialog.FileName;
+                tbEditor.SelectedText = $" ![Название картинки]({filePath}) ";
+            }
+        }
+        private void NewGroup_Click(object sender, RoutedEventArgs e)
+        {
+            var input = new GroupEdit(user.ID);
+            input.ShowDialog();
+            UpdateTreeView();
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            Global.MainFrame.GoBack();
+        }
+
+        
     }
 }
