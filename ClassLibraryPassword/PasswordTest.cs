@@ -20,7 +20,7 @@ namespace ClassLibraryPassword
             if (!password.Any(Char.IsDigit))
                 return false;
             // Если нет этих символов проверка также проваливается
-            if (password.Intersect("#$%_").Count() == 0)
+            if (password.Intersect("#$%-_").Count() == 0)
                 return false;
             return true;
         }
