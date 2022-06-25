@@ -184,11 +184,6 @@ namespace Tisinalite.Pages
 
         }
 
-        private void ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
-
         // Clicks
         private void Connect_Click(object sender, RoutedEventArgs e)
         {
@@ -268,16 +263,12 @@ namespace Tisinalite.Pages
                 }
                 catch
                 {
-                    // Хуй знает, но он всегда жалуется
-                    // По этому я его заткнул
-                    //MessageBox.Show(error.ToString());
                 }
             }
             UpdateTreeView();
         }
         private void Export_Click(object sender, RoutedEventArgs e)
         {
-            //Stream myStream;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
             saveFileDialog.Filter = "Текстовый файл (*.txt)|*.txt|MarkDown файл (*.md)|*.md|All files (*.*)|*.*";
