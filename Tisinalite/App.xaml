@@ -2,7 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Tisinalite"
-             Startup="App_Startup"
              StartupUri="MainWindow.xaml">
     <!-- #F2F2F2 #333 #27AE60-->
     <Application.Resources>

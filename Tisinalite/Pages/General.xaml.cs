@@ -18,8 +18,6 @@ namespace Tisinalite.Pages
     /// </summary>
     public partial class General : Page
     {
-        private Settings _settings = Settings.GetSettings();
-        //private string notePath;
         Users user;
         Notes openNote = new Notes();
         Groups selectedGroup = new Groups();
@@ -83,10 +81,6 @@ namespace Tisinalite.Pages
             e.CanExecute = openNote.ID != 0;
         }
         // Any functions
-        public void SaveSettings()
-        {
-            _settings.Save();
-        }
         private void UpdateTreeView()
         {
             tvNotes.Items.Clear();
