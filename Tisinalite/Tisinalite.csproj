@@ -277,5 +277,11 @@
       <LastGenOutput>BaseModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibraryPassword\ClassLibraryPassword.csproj">
+      <Project>{4263a226-d1ba-431b-86bc-b1963367f453}</Project>
+      <Name>ClassLibraryPassword</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

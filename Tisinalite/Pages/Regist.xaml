@@ -47,7 +47,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBlock Text="Электронная почта" Grid.Column="1" Grid.Row="1"/>
-            <TextBox x:Name="tbMail" Grid.Column="1" Grid.Row="2" Margin="5"/>
+            <TextBox x:Name="tbMail" Text="{Binding Login}" Grid.Column="1" Grid.Row="2" Margin="5"/>
             <TextBlock Text="Полное имя" Grid.Column="1" Grid.Row="3"/>
             <TextBox x:Name="tbFullName" Grid.Column="1" Grid.Row="4" Margin="5"/>
 
