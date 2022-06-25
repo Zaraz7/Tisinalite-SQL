@@ -13,14 +13,10 @@ namespace ClassLibraryPassword
         {
             if (password.Length < 8 || password.Length > 20)
                 return false;
-            if (!password.Any(Char.IsLower))
-                return false;
-            if (!password.Any(Char.IsUpper))
-                return false;
             if (!password.Any(Char.IsDigit))
                 return false;
             // Если нет этих символов проверка также проваливается
-            if (password.Intersect("#$%-_").Count() == 0)
+            if (password.Intersect("@#$%-_&*").Count() == 0)
                 return false;
             return true;
         }
