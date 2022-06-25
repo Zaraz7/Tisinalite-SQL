@@ -14,9 +14,5 @@ namespace Tisinalite
             Global.MainFrame = MainFrame;
         }
 
-        private void ClosingEvent(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            // При закрытии приложения
-        }
     }
 }

@@ -6,6 +6,6 @@
         xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
         xmlns:local="clr-namespace:Tisinalite"
         mc:Ignorable="d"
-        Title="Tisinalite" MinHeight="450" MinWidth="800" Closing="ClosingEvent" WindowState="Maximized">
+        Title="Tisinalite" MinHeight="450" MinWidth="800" WindowState="Maximized">
     <Frame x:Name="MainFrame" Grid.ColumnSpan="5" Grid.RowSpan="2"/>
 </Window>
