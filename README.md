@@ -1,7 +1,8 @@
 # Tisinalite-SQL
-Tisinalite-SQL - это форк ![основного приложения](https://github.com/Zaraz7/Tisinalite) для дипломной работы
+![Скриншот](documents/screen.jpg)
+Tisinalite-SQL - это форк [основного приложения](https://github.com/Zaraz7/Tisinalite) для дипломной работы
 
 ## To-do
 - [ ] Добавить требования
-- [ ] Добавить скриншётов
+- [x] Добавить скриншотов
 - [ ] Добовить документацию по установке
